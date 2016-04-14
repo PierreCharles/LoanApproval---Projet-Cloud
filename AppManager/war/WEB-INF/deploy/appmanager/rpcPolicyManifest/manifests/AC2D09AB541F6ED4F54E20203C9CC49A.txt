@@ -1,0 +1,2 @@
+serviceClass: fr.loanapproval.appmanager.client.GreetingService
+path: ACEC959E58BCEB85B1CF772694A12140.gwt.rpc
