@@ -33,11 +33,26 @@ public class AppManager implements EntryPoint {
 	 */
 	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
+	
+	public void addApproval(){
+
+	}
+	
+	
+	public void deleteApproval(){
+		
+	}
+	
+	
+	public void listApproval(){
+		
+	}
+	
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
+		final Button sendButton = new Button("Test");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
 		final Label errorLabel = new Label();
