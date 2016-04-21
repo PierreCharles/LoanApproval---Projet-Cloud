@@ -7,18 +7,24 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>fr.loanapproval.appmanager.server.GreetingServiceImpl</servlet-class>
-  </servlet>
+    <servlet-name>AppManager</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.dclonline.jerseytest</param-value>
+      </init-param>
+         <load-on-startup>1</load-on-startup>
+    </servlet>
   
   <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/appmanager/greet</url-pattern>
+    <servlet-name>AppManager</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
   
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>AppManager.html</welcome-file>
-  </welcome-file-list>
-
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
 </web-app>
+
