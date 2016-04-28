@@ -1,4 +1,4 @@
-package fr.appmanager;
+package fr.loanapproval.appmanager;
 
 public class Approval {
 
@@ -37,14 +37,11 @@ public class Approval {
 		this.manual_Response = manual_Response;
 	}
 
-	/**
-	 * Constructor of one approval
-	 * @param name
-	 * @param manual_response
-	 */
-	public Approval(String name, String manual_response) {
-		this.name = name;
-		this.manual_Response = manual_response;
+	@Override
+	public String toString() {
+		return "Approval [name=" + this.getName() + ", manual_Response=" + this.getManual_Response() + "]";
 	}
 
 }
+
+
