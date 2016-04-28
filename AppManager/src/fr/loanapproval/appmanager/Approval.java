@@ -1,3 +1,5 @@
+
+
 package fr.loanapproval.appmanager;
 
 public class Approval {
@@ -43,5 +45,6 @@ public class Approval {
 	}
 
 }
+
 
 

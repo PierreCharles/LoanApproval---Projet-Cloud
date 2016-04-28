@@ -9,11 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
-@Path("/json/metallica")
+@Path("/approval")
 public class AppManager {
 
 	@GET
@@ -21,8 +17,8 @@ public class AppManager {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Approval getTrackInJSON() {
 		Approval approval = new Approval();
-		approval.setName("Enter Sandman");
-		approval.setManual_Response("Metallica");
+		approval.setName("Pierre");
+		approval.setManual_Response("true");
 		return approval;
 	}
 
