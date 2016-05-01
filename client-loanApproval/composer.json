@@ -1,0 +1,18 @@
+{
+    "authors": [
+        {
+            "name": "BRAT Julien",
+            "homepage": "https://github.com/jbrat",
+            "role": "Developer"
+        },
+	{
+	    "name": "Pierre Charles",
+            "homepage": "https://github.com/PierreCharles",
+	    "role": "Developer"
+	}
+	
+    ],
+    "require": {
+        "silex/silex": "~1.3"
+    }
+}
