@@ -1,6 +1,4 @@
-
-
-package fr.loanapproval.appmanager;
+package fr.appmanager.model;
 
 public class Approval {
 
@@ -9,6 +7,7 @@ public class Approval {
 
 	/**
 	 * Getter of the name
+	 * 
 	 * @return
 	 */
 	public String getName() {
@@ -17,6 +16,7 @@ public class Approval {
 
 	/**
 	 * Setter of the name
+	 * 
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -25,6 +25,7 @@ public class Approval {
 
 	/**
 	 * Getter of manual_Response
+	 * 
 	 * @return
 	 */
 	public String getManual_Response() {
@@ -33,6 +34,7 @@ public class Approval {
 
 	/**
 	 * Setter of manual_Response
+	 * 
 	 * @param manual_Response
 	 */
 	public void setManual_Response(String manual_Response) {
@@ -45,6 +47,3 @@ public class Approval {
 	}
 
 }
-
-
-
