@@ -30,7 +30,8 @@ public class BankAccount {
 	 * @param account
 	 * @param risk
 	 */
-	public BankAccount(String lastName, String firstName, String account, String risk) {
+	public BankAccount(String lastName, String firstName, String account, String risk) 
+	{
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -38,35 +39,43 @@ public class BankAccount {
 		this.risk = risk;
 	}
 
-	public String getLastName() {
+	public String getLastName() 
+	{
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(String lastName) 
+	{
 		this.lastName = lastName;
 	}
 
-	public String getFirstName() {
+	public String getFirstName() 
+	{
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName) 
+	{
 		this.firstName = firstName;
 	}
 
-	public String getAccount() {
+	public String getAccount() 
+	{
 		return account;
 	}
 
-	public void setAccount(String account) {
+	public void setAccount(String account) 
+	{
 		this.account = account;
 	}
 
-	public String getRisk() {
+	public String getRisk() 
+	{
 		return risk;
 	}
 
-	public void setRisk(String risk) {
+	public void setRisk(String risk) 
+	{
 		this.risk = risk;
 	}
 	
