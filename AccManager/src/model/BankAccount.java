@@ -1,4 +1,4 @@
-package fr.accManager.model;
+package model;
 
 public class BankAccount {
 

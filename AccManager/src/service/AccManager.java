@@ -7,10 +7,11 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/bankAccount")
 public class AccManager {
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("getAccounts")
 	public String getBankAccount() {
-		return "{\"message\" : \"Hello\"}";
+		return "{\"message\" : \"TEST\"}";
 	}	
 }
