@@ -64,7 +64,7 @@ public class Persistance {
 		try {
 			datastore.delete(keyApproval);
 		} catch (Exception e){
-			throw new PersistanceDeleteException("Error when you try delete the account :" + approvalId);
+			throw new PersistanceDeleteException("Error when you try delete the approval :" + approvalId);
 		}
 		
 	}
