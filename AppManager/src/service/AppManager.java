@@ -26,19 +26,11 @@ import persistance.Persistance;
 public class AppManager 
 {
 	
-	/**
-	 * Object Persistance for add / delete / get / update in database
-	 */
 	private Persistance persistance = new Persistance();
-	
-	/**
-	 * Converter to JSON
-	 */
 	private ObjectMapper converterJson = new ObjectMapper();
 	
 	/**
-	 * Method to get all the approval from the web
-	 * 
+	 * Method for get all the approval from the web
 	 * @return Response with JSON datas
 	 */
 	@GET
@@ -60,10 +52,8 @@ public class AppManager
 	}	
 	
 	/**
-	 * Method to get an approval with his Id from the web
-	 * 
+	 * Method for get an approval with his Id from the web
 	 * @param idApproval
-	 * 
 	 * @return Response Json 
 	 */
 	@GET
@@ -82,10 +72,8 @@ public class AppManager
 	}
 	
 	/**
-	 * Method to add an approval from the web
-	 * 
+	 * Method for add an approval from the web
 	 * @param approval
-	 * 
 	 * @return Response
 	 */
 	@POST
@@ -104,10 +92,8 @@ public class AppManager
 	}
 	
 	/**
-	 * Method to update an approval with the PUT Http verbs 
-	 * 
+	 * Method for update an approval with the PUT Http verbs 
 	 * @param approval
-	 * 
 	 * @return Response
 	 */
 	@PUT
@@ -126,10 +112,8 @@ public class AppManager
 	}
 	
 	/**
-	 * Method to update an approval with the normal Post verbs HTTP 
-	 * 
+	 * Method for update an approval with the normal Post verbs HTTP 
 	 * @param aproval
-	 * 
 	 * @return
 	 */
 	@POST
@@ -148,10 +132,8 @@ public class AppManager
 	}
 	
 	/**
-	 * Method to delete an approval with his Id from the web
-	 * 
+	 * Method for delete an approval with his Id from the web
 	 * @param idApproval
-	 * 
 	 * @return Response
 	 */
 	@GET
@@ -171,9 +153,7 @@ public class AppManager
 	
 	/**
 	 * Method to delete an approval with his Id from an DELETE verb http web
-	 * 
 	 * @param idApproval
-	 * 
 	 * @return Response
 	 */
 	@DELETE

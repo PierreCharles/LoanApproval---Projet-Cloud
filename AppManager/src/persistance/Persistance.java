@@ -22,16 +22,11 @@ import model.Approval;
 
 public class Persistance {
 	
-	/**
-	 * The datastore Object
-	 */
 	private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 	
 	/**
-	 * Method to persist an approval in the Datastore
-	 * 
+	 * Method for persist an approval in the Datastore
 	 * @param approval
-	 * 
 	 * @throws Exception
 	 */
 	public void persist(Approval approval) throws PersistanceAddException
@@ -51,16 +46,13 @@ public class Persistance {
 	}
 	
 	/**
-	 * Method to delete an approval with his Id
-	 * 
+	 * Method for delete an approval with his Id
 	 * @param approvalId
-	 * 
 	 * @throws PersistanceDeleteException
 	 */
 	public void deleteApprovalById(String approvalId) throws PersistanceDeleteException 
 	{
 		Key keyApproval = KeyFactory.createKey("approval", approvalId);
-		
 		try {
 			datastore.delete(keyApproval);
 		} catch (Exception e){
@@ -70,12 +62,9 @@ public class Persistance {
 	}
 	
 	/**
-	 * Method to get an approval with his Id
-	 * 
+	 * Method for get an approval with his Id
 	 * @param approvalId
-	 * 
 	 * @return approval
-	 * 
 	 * @throws PersistanceNotFoundException
 	 */
 	public Approval getApprovalById(String approvalId) throws PersistanceNotFoundException
@@ -83,39 +72,29 @@ public class Persistance {
 		Key keyApproval = KeyFactory.createKey("approval", approvalId);
 		try {
 			Entity entityApproval = datastore.get(keyApproval);
-			
-			return new Approval((String)entityApproval.getProperty("name"), 
-								   (String)entityApproval.getProperty("manualResponse"));
+			return new Approval((String)entityApproval.getProperty("name"),(String)entityApproval.getProperty("manualResponse"));
 		} catch (Exception e) {
 			throw new PersistanceNotFoundException("The approval " + approvalId + " can't be find");
 		}	
 	}
 	
 	/**
-	 * Method to get all the approvals
-	 * 
+	 * Method for get all the approvals
 	 * @return List<Approval>
-	 * 
 	 * @throws PersistanceSelectException 
 	 */
 	public List<Approval> getApprovals() throws PersistanceSelectException, PersistanceNotFoundException
 	{
 		List<Approval> approvalsList = new ArrayList<Approval>();
-		
 		Query query = new Query("approval").addSort("dateAdd", SortDirection.DESCENDING);
-		
         try {
 			List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
-			
 	        for (Entity result : results) {
-	        	approvalsList.add(new Approval((String)result.getProperty("name"), 
-						   						(String)result.getProperty("manualResponse")));	
+	        	approvalsList.add(new Approval((String)result.getProperty("name"),(String)result.getProperty("manualResponse")));	
 	        }
-	        
 	        if (approvalsList.size() == 0) {
 	        	throw new PersistanceNotFoundException("There is nobody approvals actualy");
 	        }
-	        
 	        return approvalsList;
 			
         } catch (Exception e) {
