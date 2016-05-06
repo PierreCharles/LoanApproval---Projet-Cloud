@@ -1,4 +1,5 @@
 # LoanApproval---Projet-Cloud
+-------
 
 Implémenter sous forme de services le Loan approval (demande de crédit).
 
@@ -21,3 +22,5 @@ Also, try to create new approval using JSON :
 ## CheckAccount
 
 ## LoanApproval
+
+## Client
