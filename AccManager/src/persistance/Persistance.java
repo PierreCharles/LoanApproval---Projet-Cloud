@@ -125,7 +125,7 @@ public class Persistance {
 	        return accountsList;
 			
         } catch (Exception e) {
-        	throw new PersistanceSelectException("An error attempt when you try to get all the accounts");
+        	throw new PersistanceSelectException("An error attempt when you try to get all the accounts, maybe there is no accounts actually");
         }
 	}	
 }

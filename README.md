@@ -5,6 +5,8 @@ Implémenter sous forme de services le Loan approval (demande de crédit).
 
 ## AccManager
 
+The accManager is a webservice CRUD on bank account, allow to Create, Read, Update, Delete accounts with a firstName, lastName, account id and the risk 
+
 ## AppManager
 
 For testing JSON rweb service result, in a terminal, try these commands:
@@ -24,3 +26,5 @@ Also, try to create new approval using JSON :
 ## LoanApproval
 
 ## Client
+
+The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 

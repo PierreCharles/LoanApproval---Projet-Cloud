@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -51,10 +52,10 @@ public class AccManager
 			String output = converterJson.writeValueAsString(listAccounts);		
 			return Response.status(200).entity(output).build();
 		} catch (PersistanceNotFoundException noFound) {
-			String output = "'error':'" + noFound.getMessage() + "'";
+			String output = "{'error':'" + noFound.getMessage() + "'}";
 			return Response.status(204).entity(output).build();
 		} catch (Exception select) {
-			String output = "'error':'" + select.getMessage() + "'";
+			String output = "{'error':'" + select.getMessage() + "'}";
 			return Response.status(500).entity(output).build();
 		}
 	}	
@@ -90,6 +91,7 @@ public class AccManager
 	 */
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("createAccount")
 	public Response createAccount(BankAccount account) 
 	{
