@@ -23,6 +23,29 @@ Also, try to create new approval using JSON :
 
 ## CheckAccount
 
+Commande for create the checkaccount web service with maven and deploying into heroku :
+
+    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp
+    -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false
+    -DgroupId=fr.checkaccount -DartifactId=checkaccount -Dpackage=fr.checkaccount
+    -DarchetypeVersion=2.22.2
+
+    cd checkaccount
+
+    mvn clean package
+
+    git init
+
+    heroku create
+
+    git add src/ pom.xml Procfile system.properties
+
+    git commit -m "Initial commit"
+
+    git push heroku master
+
+
+
 ## LoanApproval
 
 ## Client
