@@ -14,6 +14,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
+
 import exceptions.PersistanceAddException;
 import exceptions.PersistanceDeleteException;
 import exceptions.PersistanceSelectException;
@@ -41,6 +42,7 @@ public class Persistance {
 			entityAccount.setProperty("lastName",account.getLastName());
 			entityAccount.setProperty("firstName",account.getFirstName());
 			entityAccount.setProperty("account",account.getAccount());
+			entityAccount.setProperty("amount", account.getAmount());
 			entityAccount.setProperty("risk",account.getRisk());
 			
 			Date dateAdd = new Date();
@@ -89,6 +91,7 @@ public class Persistance {
 			return new BankAccount((String)entityAccount.getProperty("lastName"), 
 								   (String)entityAccount.getProperty("firstName"), 
 								   (String)entityAccount.getProperty("account"), 
+								   (String)entityAccount.getProperty("amount"),
 								   (String)entityAccount.getProperty("risk"));
 		} catch (Exception e) {
 			throw new PersistanceNotFoundException("The account " + accountId + " can't be find");
@@ -115,6 +118,7 @@ public class Persistance {
 	        	accountsList.add(new BankAccount((String)result.getProperty("lastName"), 
 						   						(String)result.getProperty("firstName"), 
 						   						(String)result.getProperty("account"), 
+						   						(String)result.getProperty("amount"),
 						   						(String)result.getProperty("risk")));	
 	        }
 	        
