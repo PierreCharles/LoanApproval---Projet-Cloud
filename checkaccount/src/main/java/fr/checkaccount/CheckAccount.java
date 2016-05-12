@@ -29,7 +29,7 @@ import org.json.simple.JSONObject;
 @Path("checkaccount")
 public class CheckAccount {
 
-	public static final String urlAccManager = "https://afternoon-everglades-21216.herokuapp.com/checkaccount/tempcheck";
+	public static final String URL_ACCMANAGER = "https://afternoon-everglades-21216.herokuapp.com/checkaccount/tempcheck";
 
 	/**
 	 * Methode for check is an account is "low" or "hight" -> Call AccManager service
@@ -45,13 +45,14 @@ public class CheckAccount {
 
        		int id = Integer.parseInt(idAccount);
 			Client client = Client.create();
-			WebResource webResource = client.resource(urlAccManager+"/"+id);
+			WebResource webResource = client.resource(URL_ACCMANAGER+"/"+id);
 			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 
 			if (response.getStatus() != 200) 
 			   throw new RuntimeException("Failed : HTTP error code : "	+ response.getStatus());
 
 			String entity = response.getEntity(String.class);
+			
 			JSONObject json =  (JSONObject) new JSONParser().parse(entity);
 			String output = "{\"response\":\""+json.get("risk")+"\"}";
 
