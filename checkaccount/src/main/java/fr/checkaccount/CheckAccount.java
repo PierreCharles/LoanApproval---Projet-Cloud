@@ -52,7 +52,6 @@ public class CheckAccount {
 			   throw new RuntimeException("Failed : HTTP error code : "	+ response.getStatus());
 
 			String entity = response.getEntity(String.class);
-			
 			JSONObject json =  (JSONObject) new JSONParser().parse(entity);
 			String output = "{\"response\":\""+json.get("risk")+"\"}";
 
