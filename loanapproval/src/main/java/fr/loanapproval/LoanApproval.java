@@ -21,11 +21,11 @@ import org.json.simple.JSONObject;
 @Path("loanapproval")
 public class LoanApproval {
 
-    public static final int SOLD = "https://afternoon-everglades-21216.herokuapp.com/checkaccount/tempcheck";
+    public static final int SOLD = 10000;
 
-    public static final int URL_APPMANAGER = "https://afternoon-everglades-21216.herokuapp.com/checkaccount/tempcheck";
+    public static final int URL_APPMANAGER = "";
 
-    public static final int URL_CHECKACCOUNT = "https://afternoon-everglades-21216.herokuapp.com/checkaccount/tempcheck";
+    public static final int URL_CHECKACCOUNT = "";
 
     /**
      * Methode for check is an account is "low" or "hight" -> Call AccManager service
