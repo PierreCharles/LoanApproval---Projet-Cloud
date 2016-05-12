@@ -5,7 +5,13 @@ Implémenter sous forme de services le Loan approval (demande de crédit).
 
 ## AccManager
 
-The accManager is a webservice CRUD on bank account, allow to Create, Read, Update, Delete accounts with a firstName, lastName, account id and the risk 
+The accManager is a webservice CRUD on bank account, allow to Create, Read, Update, Delete accounts with a firstName, lastName, account id, amount of the account and the risk 
+
+- /getAccounts --> method to return all the accounts
+- /createAccount --> method to create an account with JSON POST
+- /getAccount/{accountId} --> return to get an account with his ID in param
+- /updateAccount --> method to update an account wich is send in POST Request
+- /deleteAccount/{idAccount} --> delete an account with his ID
 
 ## AppManager
 
