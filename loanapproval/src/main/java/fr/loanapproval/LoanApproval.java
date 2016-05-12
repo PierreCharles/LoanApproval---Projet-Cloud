@@ -34,25 +34,23 @@ public class LoanApproval {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("checkrisk/{sold}")
-    public Response checkRisk(@PathParam("sold") String sold) 
+    @Path("/{params}")
+    public Response creditRequestById(@PathParam("params") String params) 
     {
         try {
             int id = Integer.parseInt(sold);
             if(sold<SOLD)
             {
-                String entity =  getDataRequestFromService(URL_CHECKACCOUNT+"/"+id);
-                JSONObject json =  (JSONObject) new JSONParser().parse(entity);
+                JSONObject json  =  getDataRequestFromService(URL_CHECKACCOUNT+"/"+id);
+                
                 if(json.get("response")=="high"){
-                    String entity =  getDataRequestFromService(URL_APPMANAGER+"/"+id));
-                    JSONObject json =  (JSONObject) new JSONParser().parse(entity);
+                    JSONObject json =  getDataRequestFromService(URL_APPMANAGER+"/"+id));
                     String output = "{\"response\":\""+json.get("manualResponse")+"\"}";
                 } else {
                     String output = "{\"response\":\"approved\" , \"account\" : \" \"}";
                 }   
             } else {
-                String entity =  getDataRequestFromService(URL_APPMANAGER+"/"+id));
-                JSONObject json =  (JSONObject) new JSONParser().parse(entity);
+                JSONObject json  getDataRequestFromService(URL_APPMANAGER+"/"+id));
                 String output = "{\"response\":\""+json.get("manualResponse")+"\"}";
             }    
             return Response.status(200).entity(output).build();
@@ -67,7 +65,7 @@ public class LoanApproval {
      * @param url to service
      * @return a JSON string
      */
-    private String getDataRequestFromService(String urlService){
+    private JSONObject getDataRequestFromService(String urlService){
             Client client = Client.create();
             WebResource webResource = client.resource(urlService;
             ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
@@ -75,7 +73,9 @@ public class LoanApproval {
             if (response.getStatus() != 200) 
                throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
 
-            return response.getEntity(String.class);
+            String entity = response.getEntity(String.class);
+            JSONObject json =  (JSONObject) new JSONParser().parse(entity);
+            return json;
     }
 
     
