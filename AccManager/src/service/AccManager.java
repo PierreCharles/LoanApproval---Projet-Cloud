@@ -10,12 +10,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.google.appengine.repackaged.org.codehaus.jackson.JsonGenerationException;
-import com.google.appengine.repackaged.org.codehaus.jackson.map.JsonMappingException;
-import com.google.appengine.repackaged.org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exceptions.PersistanceAddException;
 import exceptions.PersistanceDeleteException;
@@ -26,7 +25,6 @@ import persistance.Persistance;
 @Path("/bankAccount")
 public class AccManager 
 {
-	
 	/**
 	 * Object Persistance for add / delete / get / update in database
 	 */
@@ -76,10 +74,13 @@ public class AccManager
 			BankAccount account = (BankAccount)persistance.getAccountById(idAccount);
 			String output = converterJson.writeValueAsString(account);
 			return Response.status(200).entity(output).build();
-		} catch (Exception e) {
+		} catch (PersistanceNotFoundException e) {
 			String output = "{'error':'"+e.getMessage()+"'}";	
 			return Response.status(204).entity(output).build();
-		} 
+		} catch (Exception e) {
+			String output = "{'error':'erreur de conversion en JSON'}";
+			return Response.status(204).entity(output).build();
+		}
 	}
 	
 	/**
@@ -114,12 +115,13 @@ public class AccManager
 	 */
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("updateAccount")
 	public Response updateAccountHttpMethod(BankAccount account)
 	{
 		try {
 			persistance.persist(account);
-			String output = "{'message':'The account was correctly created'}";
+			String output = "{'message':'The account was correctly updated'}";
 			return Response.status(200).entity(output).build();
 		} catch (PersistanceAddException e) {
 			String output = "{'error':'" + e.getMessage() + "'}";
@@ -136,12 +138,13 @@ public class AccManager
 	 */
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("updateAccount")
 	public Response updateAccount(BankAccount account)
 	{
 		try {
 			persistance.persist(account);
-			String output = "{'message':'The account was correctly created'}";
+			String output = "{'message':'The account was correctly updated'}";
 			return Response.status(200).entity(output).build();
 		} catch (PersistanceAddException e) {
 			String output = "{'error':'" + e.getMessage() + "'}";
