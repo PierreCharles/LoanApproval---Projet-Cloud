@@ -5,8 +5,7 @@ import javax.ws.rs.core.Application;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -25,9 +24,8 @@ public class CheckAccountTest extends JerseyTest {
      */
     @Test
     public void testGetIt() {
-        final JSONObject responseMsg = target().path("checkaccount").request().get(JSONObject.class);
-        JSONObject json = new JSONObject();
-        json.put("test", "hello heroku");
+        String responseMsg ="";
+        String json = "";
         assertEquals(json, responseMsg);
     }
 }
