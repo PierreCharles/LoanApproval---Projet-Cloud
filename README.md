@@ -27,10 +27,7 @@ CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.her
 
 Commande for create the checkaccount web service with maven and deploying into heroku :
 
-    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp
-    -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false
-    -DgroupId=fr.checkaccount -DartifactId=checkaccount -Dpackage=fr.checkaccount
-    -DarchetypeVersion=2.22.2
+    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=fr.checkaccount -DartifactId=checkaccount -Dpackage=fr.checkaccount -DarchetypeVersion=2.22.2
 
     cd checkaccount
 
@@ -49,12 +46,9 @@ Commande for create the checkaccount web service with maven and deploying into h
 
 ## LoanApproval
 
-CheckAccount is deployed on Heroku here : https://floating-bastion-70284.herokuapp.com/myresource
+LoanApproval is deployed on Heroku here : https://floating-bastion-70284.herokuapp.com/myresource
 
-    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp
-    -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false
-    -DgroupId=fr.loanapproval -DartifactId=loanapproval -Dpackage=fr.loanapproval
-    -DarchetypeVersion=2.22.2
+    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=fr.loanapproval -DartifactId=loanapproval -Dpackage=fr.loanapproval -DarchetypeVersion=2.22.2
 
     cd loanapproval
 
