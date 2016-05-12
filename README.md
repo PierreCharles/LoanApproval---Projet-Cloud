@@ -23,7 +23,7 @@ Also, try to create new approval using JSON :
 
 ## CheckAccount
 
-CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.herokuapp.com/checkaccount
+CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.herokuapp.com/checkaccount/checkrisk/1000
 
 Commande for create the checkaccount web service with maven and deploying into heroku :
 

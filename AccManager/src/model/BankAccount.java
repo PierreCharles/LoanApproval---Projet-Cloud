@@ -18,6 +18,11 @@ public class BankAccount {
 	private String account;
 	
 	/**
+	 * Amount of the account
+	 */
+	private float amount;
+	
+	/**
 	 * Risk of the account value
 	 */
 	private String risk;
@@ -30,12 +35,13 @@ public class BankAccount {
 	 * @param account
 	 * @param risk
 	 */
-	public BankAccount(String lastName, String firstName, String account, String risk) 
+	public BankAccount(String lastName, String firstName, String account, String amount, String risk) 
 	{
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.account = account;
+		this.amount = Float.valueOf(amount.trim());
 		this.risk = risk;
 	}
 
@@ -69,6 +75,14 @@ public class BankAccount {
 		this.account = account;
 	}
 
+	public float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(float amount) {
+		this.amount = amount;
+	}
+
 	public String getRisk() 
 	{
 		return risk;
@@ -77,6 +91,5 @@ public class BankAccount {
 	public void setRisk(String risk) 
 	{
 		this.risk = risk;
-	}
-	
+	}	
 }

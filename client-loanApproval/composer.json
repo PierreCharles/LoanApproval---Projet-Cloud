@@ -9,18 +9,23 @@
 	    "name": "Pierre Charles",
             "homepage": "https://github.com/PierreCharles",
 	    "role": "Developer"
-	}
-	
+	}	
     ],
     "require": {
         "php": ">=5.3.3",
-        "twitter/bootstrap": "dev-master",
-        "smarty/smarty": "3.1.*@dev"
+        "twitter/bootstrap": "^3.3",
+        "twig/twig": "^1.24",
+        "symfony/twig-bridge": "^3.0"
     },
     "require-dev": {
         "silex/silex": "~2.0@dev"
      },
-    "autoload": {
-        "psr-4": { "FractalizeR\\": "src/" }
+     "scripts": {
+        "post-install-cmd": [
+            "cp -r $(pwd)/vendor/twitter/bootstrap/dist/ $(pwd)/web/bootstrap/"
+        ],
+        "post-update-cmd": [
+            "cp -r $(pwd)/vendor/twitter/bootstrap/dist/ $(pwd)/web/bootstrap/"
+        ]
     }
 }
