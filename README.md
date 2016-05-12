@@ -46,7 +46,7 @@ Commande for create the checkaccount web service with maven and deploying into h
 
 ## LoanApproval
 
-LoanApproval is deployed on Heroku here : https://floating-bastion-70284.herokuapp.com/myresource
+LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.herokuapp.com/myresource
 
     mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=fr.loanapproval -DartifactId=loanapproval -Dpackage=fr.loanapproval -DarchetypeVersion=2.22.2
 
