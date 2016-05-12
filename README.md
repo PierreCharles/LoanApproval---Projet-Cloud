@@ -10,8 +10,8 @@ The accManager is a webservice CRUD on bank account, allow to Create, Read, Upda
 - /getAccounts --> method to return all the accounts
 - /createAccount --> method to create an account with JSON POST
 - /getAccount/{accountId} --> return to get an account with his ID in param
-- /updateAccount --> method to update an account wich is send in POST Request
-- /deleteAccount/{idAccount} --> delete an account with his ID
+- /updateAccount --> method to update an account wich is send in POST or PUT HTTP Request
+- /deleteAccount/{idAccount} --> delete an account with his ID with GET or DELETE HTTP Request
 
 ## AppManager
 
