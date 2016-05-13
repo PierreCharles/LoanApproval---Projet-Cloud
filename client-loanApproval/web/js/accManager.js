@@ -98,7 +98,6 @@ function saveAccount() {
         url : urlService+path,
         type : 'POST', 
         data : JSON.stringify(account),
-        dataType: 'json',
         contentType: 'application/json',
     }).done(function(data) {
         if(data.message !== "" || data.message !== undefined) {
