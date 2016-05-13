@@ -13,9 +13,37 @@ The accManager is a webservice CRUD on bank account, allow to Create, Read, Upda
 - /updateAccount --> method to update an account wich is send in POST or PUT HTTP Request
 - /deleteAccount/{idAccount} --> delete an account with his ID with GET or DELETE HTTP Request
 
+Add an account with POST methode:
+
+    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre-UPDATED","lastName": "Charles-UPDATED","account": "00002","amount": "10000","risk": "true"}' http://accmanager-1294.appspot.com/rest/bankAccount/createAccount
+
+Update an account with POST methode:
+
+    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre-UPDATED","lastName": "Charles-UPDATED","account": "00002","amount": "10000","risk": "true"}' http://accmanager-1294.appspot.com/rest/bankAccount/updateAccount
+
+ Get list accounts with GET methode:
+
+    curl -i -H Accept:application/json -X GET http://accmanager-1294.appspot.com/rest/bankAccount/getAccounts
+
+Get account by id with GET methode:
+
+    curl -i -H Accept:application/json -X GET http://accmanager-1294.appspot.com/rest/bankAccount/getAccount/00001
+
+Deleting an account by id with GET methode:
+
+    curl -i -H Accept:application/json -X GET http://accmanager-1294.appspot.com/rest/bankAccount/deleteAccount/00001
+
 ## AppManager
 
 AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/
+
+The AppManager is a webservice CRUD on approval, allow to Create, Read, Update, Delete approvals with a firstName, lastName, id, response of the approval 
+
+- /getApprovals --> method to return all the approvals
+- /createApproval --> method to create an approval with JSON POST
+- /getApproval/{approvalId} --> return to get an approval with his ID in param
+- /updateApproval --> method to update an approval wich is send in POST or PUT HTTP Request
+- /deleteApproval/{idApproval} --> delete an approval with his ID with GET or DELETE HTTP Request
 
 For testing JSON rweb service result, in a terminal, try these commands:
 
