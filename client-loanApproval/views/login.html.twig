@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %} 
+<div class="login">
+    <p class="h3">Accès à l'administration des comptes</p>
+    <form method="POST" action="/loanApproval/login">
+        <table>
+            <tr>
+                <td>Login :</td>
+                <td><input type="text" name="login" value="{{ login }}" required=""></td>
+            </tr>
+            <tr>
+                <td>Password :</td>
+                <td><input type="text" name="password" value="{{ password }}" required=""></td>
+            </tr>
+            <tr>
+                <td><input type="submit" class="btn-success" value="Connexion"</td>
+            </tr>
+            <p class="error">{{ error }}</p>
+        </table>
+    </form>
+</div>
+{% endblock body %}

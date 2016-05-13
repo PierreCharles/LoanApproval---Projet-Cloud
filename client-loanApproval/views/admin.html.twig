@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block body %} 
+<div class="panel">
+    <p class="h3">Gestion des comptes</p>
+    <input type="button" class="btn-info refresh" value='refresh'>
+    <input type="button" class="btn-success addAccount" value='add'>
+    <input type="button" class="btn-danger disconnect" value='Disconnect'>
+
+    <div class="formAccount" style="display:none;">
+        <form method="POST" action="">
+            <table>
+                <tr>
+                    <td>Nom :</td>
+                    <td><input type="text" id="lastName" name="lastName" required=""></td>
+                </tr>
+                <tr>
+                    <td>Prenom :</td>
+                    <td><input type="text" id="firstName" name="firstName" required=""></td>
+                </tr>
+                <tr>
+                    <td>Numero compte :</td>
+                    <td><input type="text" id="account" name="account" required=""></td>
+                </tr>
+                <tr>
+                    <td>Montant sur le compte :</td>
+                    <td><input type="text" id="amount" name="amount" required=""></td>
+                </tr>
+                <tr>
+                    <td>Risque :</td>
+                    <td><input type="text" id="risk" name="risk" required=""></td>
+                </tr>
+                <tr>
+                    <td><input type="button" class="btn-success save" value="Enregistrer"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="listAccounts">
+        <p class="h4">Liste des comptes bancaires :</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id account</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Montant actuel</th>
+                    <th>Risque</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="tbodyAccounts">
+               
+            </tbody>
+            <p class='errorRefresh'></p>
+        </table>
+    </div>
+</div>
+{% endblock body %}

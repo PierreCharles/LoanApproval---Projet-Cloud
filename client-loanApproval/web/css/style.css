@@ -1,0 +1,36 @@
+
+
+form {
+    text-align: center;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 10px 50px;
+}
+
+th, td {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+footer {
+    margin-top:100px;
+}
+
+.submit {
+    margin-left:50px;
+    margin-top:50px;
+}
+
+.bouton_td {
+    border : 0px;
+}
+
+.error {
+    color:red;
+}
+
+.errorRefresh {
+    color:red;
+}
