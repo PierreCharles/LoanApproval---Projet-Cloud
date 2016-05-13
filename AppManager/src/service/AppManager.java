@@ -154,7 +154,7 @@ public class AppManager {
 	 * @return Response
 	 */
 	@GET
-	@Path("deleteApproval{idApproval}")
+	@Path("deleteApproval/{idApproval}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteApproval(@PathParam("idApproval") String idApproval) {
 		try {
@@ -175,7 +175,7 @@ public class AppManager {
 	 * @return Response
 	 */
 	@DELETE
-	@Path("deleteAccount/{idApproval}")
+	@Path("deleteApproval/{idApproval}")
 	public Response deleteApprovalMethodHttp(@PathParam("idApproval") String idApproval) {
 		try {
 			persistance.deleteApprovalById(idApproval);
