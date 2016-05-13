@@ -59,7 +59,7 @@ function refreshAccounts() {
                     $('errorRefresh').text(data.message);   
                 });
                 
-                refreshAccounts();
+                window.location.reload();
             });
 
             $('.updateAccount'+compteur).on('click',function() {
@@ -97,7 +97,7 @@ function saveAccount() {
         amount:parseFloat($('#amount').val()),
         risk:$('#risk').val()
     };
-    console.log($('#update').val());
+    
     if($('#update').val() == 1) {
         var path = 'updateAccount';
     } else {
@@ -108,13 +108,15 @@ function saveAccount() {
         url : urlService+path,
         type : 'POST', 
         data : JSON.stringify(account),
-        contentType: 'application/json',
+        contentType: 'application/json'
     }).done(function(data) {
         if(data.message !== "" || data.message !== undefined) {
             $('.errorRefresh').text(data.message);
         } else {
             $('errorRefresh').text(data.error);
         }     
+
+        refreshAccounts();
     }).fail(function(data) {
         $('.errorRefresh').text("Une erreur est survenue lors de l'ajout ou de la modification du compte: "+account.account);
     });

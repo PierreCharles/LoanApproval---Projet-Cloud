@@ -117,3 +117,4 @@ LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.hero
 ## Client
 
 The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
+Utilisation d'un plugin Chrome 'enable cross-origin' pour éviter les soucis : Access-Control-Allow-Origin --> CORS when try to post informationsO
