@@ -11,6 +11,13 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 use \Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 
+
+/**
+ * Redirection du / sur /loanApproval
+ */
+$app->get('/', function() use($app) {
+    return $app->redirect('/loanApproval');
+});
 /**
  * Home page loanApproval
  */
