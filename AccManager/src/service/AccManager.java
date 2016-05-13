@@ -50,10 +50,10 @@ public class AccManager
 			String output = converterJson.writeValueAsString(listAccounts);	
 			return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (PersistanceNotFoundException noFound) {
-			String output = "{'error':'" + noFound.getMessage() + "'}";
+			String output = "{\"error\":\"" + noFound.getMessage() + "\"}";
 			return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (Exception select) {
-			String output = "{'error':'" + select.getMessage() + "'}";
+			String output = "{\"error':\"" + select.getMessage() + "\"}";
 			return Response.status(500).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		}
 	}	
@@ -75,10 +75,10 @@ public class AccManager
 			String output = converterJson.writeValueAsString(account);
 			return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (PersistanceNotFoundException e) {
-			String output = "{'error':'"+e.getMessage()+"'}";	
+			String output = "{\"error\":\""+e.getMessage()+"\"}";	
 			return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (Exception e) {
-			String output = "{'error':'erreur de conversion en JSON'}";
+			String output = "{\"error\":\"erreur de conversion en JSON\"}";
 			return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
@@ -98,10 +98,10 @@ public class AccManager
 	{
 		try {
 			persistance.persist(account);
-			String output = "{'message':'The account was correctly created'}";
+			String output = "{\"message\":\"The account was correctly created\"}";
 			return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (PersistanceAddException e) {
-			String output = "{'error':'" + e.getMessage() + "'}";
+			String output = "{\"error\":\"" + e.getMessage() + "\"}";
 			return Response.status(500).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
@@ -121,10 +121,10 @@ public class AccManager
 	{
 		try {
 			persistance.persist(account);
-			String output = "{'message':'The account was correctly updated'}";
+			String output = "{\"message\":\"The account was correctly updated\"}";
 			return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (PersistanceAddException e) {
-			String output = "{'error':'" + e.getMessage() + "'}";
+			String output = "{\"error\":\"" + e.getMessage() + "\"}";
 			return Response.status(500).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
@@ -144,10 +144,10 @@ public class AccManager
 	{
 		try {
 			persistance.persist(account);
-			String output = "{'message':'The account was correctly updated'}";
+			String output = "{\"message\":\"The account was correctly updated\"}";
 			return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (PersistanceAddException e) {
-			String output = "{'error':'" + e.getMessage() + "'}";
+			String output = "{\"error\":\"" + e.getMessage() + "\"}";
 			return Response.status(500).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
@@ -166,10 +166,10 @@ public class AccManager
 	{
 		try {
 			persistance.deleteAccountById(idAccount);
-			String output = "{'message':'The acccount :" + idAccount + " has been deleted correctly'}";
+			String output = "{\"message\":\"The acccount :" + idAccount + " has been deleted correctly\"}";
 			return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (PersistanceDeleteException e) {
-			String output = "{'error':'" + e.getMessage() + "'}";
+			String output = "{\"error':\"" + e.getMessage() + "\"}";
 			return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		}
 	}
@@ -187,10 +187,10 @@ public class AccManager
 	{
 		try {
 			persistance.deleteAccountById(idAccount);
-			String output = "{'message':'The acccount :" + idAccount + " has been deleted correctly'}";
+			String output = "{\"message\":\"The acccount :" + idAccount + " has been deleted correctly\"}";
 			return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		} catch (PersistanceDeleteException e) {
-			String output = "{'error':'" + e.getMessage() + "'}";
+			String output = "{\"error\":\"" + e.getMessage() + "\"}";
 			return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		}
 	}	
