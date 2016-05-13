@@ -1,47 +1,72 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown=true) 
 public class BankAccount {
 
 	/**
 	 * Name of client
 	 */
-	private String lastName;
+	@JsonProperty("lastName") private String lastName;
 	
 	/**
 	 * First name of the client
 	 */
-	private String firstName;
+	@JsonProperty("firstName") private String firstName;
 	
 	/**
 	 * Account id
 	 */
-	private String account;
+	@JsonProperty("account") private String account;
 	
 	/**
 	 * Amount of the account
 	 */
-	private float amount;
+	@JsonProperty("amount") private float amount;
 	
 	/**
 	 * Risk of the account value
 	 */
-	private String risk;
+	@JsonProperty("risk") private String risk;
 
 	/**
-	 * Constructor of the class Bank account 
+	 * Constructor of the class Bank account FOR JSON
 	 * 
 	 * @param lastName
 	 * @param firstName
 	 * @param account
+	 * @param amount
 	 * @param risk
 	 */
-	public BankAccount(String lastName, String firstName, String account, String amount, String risk) 
+	@JsonCreator
+	public BankAccount(@JsonProperty("lastName")String lastName, @JsonProperty("firstName")String firstName, @JsonProperty("account")String account, @JsonProperty("amount")String amount, @JsonProperty("risk")String risk) 
 	{
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.account = account;
 		this.amount = Float.valueOf(amount.trim());
+		this.risk = risk;
+	}
+
+	/**
+	 * Constructor basic of the class Bank account
+	 * 
+	 * @param lastName
+	 * @param firstName
+	 * @param account
+	 * @param amount
+	 * @param risk
+	 */
+	public BankAccount(String lastName, String firstName, String account, float amount, String risk) {
+		super();
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.account = account;
+		this.amount = amount;
 		this.risk = risk;
 	}
 

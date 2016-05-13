@@ -87,11 +87,12 @@ public class Persistance {
 		Key keyAccount = KeyFactory.createKey("account", accountId);
 		try {
 			Entity entityAccount = datastore.get(keyAccount);
-			
+
+			Double amount = (Double) entityAccount.getProperty("amount");
 			return new BankAccount((String)entityAccount.getProperty("lastName"), 
 								   (String)entityAccount.getProperty("firstName"), 
 								   (String)entityAccount.getProperty("account"), 
-								   (String)entityAccount.getProperty("amount"),
+								   (float)amount.floatValue(),
 								   (String)entityAccount.getProperty("risk"));
 		} catch (Exception e) {
 			throw new PersistanceNotFoundException("The account " + accountId + " can't be find");
@@ -115,10 +116,11 @@ public class Persistance {
 			List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
 			
 	        for (Entity result : results) {
+	        	Double amount = (Double) result.getProperty("amount");
 	        	accountsList.add(new BankAccount((String)result.getProperty("lastName"), 
 						   						(String)result.getProperty("firstName"), 
 						   						(String)result.getProperty("account"), 
-						   						(String)result.getProperty("amount"),
+						   						(float)amount.floatValue(),
 						   						(String)result.getProperty("risk")));	
 	        }
 	        
