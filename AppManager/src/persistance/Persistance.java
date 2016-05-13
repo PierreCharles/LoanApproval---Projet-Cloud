@@ -38,11 +38,11 @@ public class Persistance {
 	public void persist(Approval approval) throws PersistanceAddException
 	{
 		try {
-			Entity entityApproval = new Entity("id", approval.getId());
+			Entity entityApproval = new Entity("approval", approval.getId());
 			entityApproval.setProperty("lastName",approval.getLastName());
 			entityApproval.setProperty("firstName",approval.getFirstName());
-			entityApproval.setProperty("account",approval.getId());
-			entityApproval.setProperty("risk",approval.getResponse());
+			entityApproval.setProperty("id",approval.getId());
+			entityApproval.setProperty("response",approval.getResponse());
 			
 			Date dateAdd = new Date();
 			entityApproval.setProperty("dateAdd", dateAdd);
@@ -62,7 +62,7 @@ public class Persistance {
 	 */
 	public void deleteApprovalById(String approvalId) throws PersistanceDeleteException 
 	{
-		Key keyApproval = KeyFactory.createKey("id", approvalId);
+		Key keyApproval = KeyFactory.createKey("approval", approvalId);
 		
 		try {
 			datastore.delete(keyApproval);
@@ -83,7 +83,7 @@ public class Persistance {
 	 */
 	public Approval getApprovalById(String approvalId) throws PersistanceNotFoundException
 	{
-		Key keyApproval = KeyFactory.createKey("id", approvalId);
+		Key keyApproval = KeyFactory.createKey("approval", approvalId);
 		try {
 			Entity entityAccount = datastore.get(keyApproval);
 			return new Approval((String)entityAccount.getProperty("lastName"), 

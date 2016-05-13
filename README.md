@@ -15,16 +15,29 @@ The accManager is a webservice CRUD on bank account, allow to Create, Read, Upda
 
 ## AppManager
 
+AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/
+
 For testing JSON rweb service result, in a terminal, try these commands:
 
-    curl -XGET -H "Accept: application/json" http://appmanager-1280.appspot.com/rest/appmanager/getApprovals
-    curl -XGET -H "Accept: application/json" http://appmanager-1280.appspot.com/rest/appmanager/getApproval/picharles
+Add an approval with POST methode:
 
-Also, try to create new approval using JSON :
+    curl -XPOST -H 'Content-Type:application/json' -d '{ "firstName": "Pierre UPDATE","lastName": "CHARLES UPDATE","id": "00001","response": "approved"}' http://1-dot-appmanager-1280.appspot.com/rest/approval/updateApproval
 
-    curl -XPOST -H "Accept: application/json" -H 'Content-Type: application/json' \
-    -d '{ "name": "picharles", "manualResponse": "true"}' \
-    http://appmanager-1280.appspot.com/rest/appmanager/createApproval
+Update an approval with POST methode:
+
+    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre","lastName": "Charles","id": "00001","response": "approved"}' http://1-dot-appmanager-1280.appspot.com/rest/approval/createApproval
+
+ Get list approvals with GET methode:
+
+    curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/getApprovals
+
+Get approval by id with GET methode:
+
+    curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/getApproval/00001
+
+Deleting an approval by id with GET methode:
+
+    curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/deleteApproval/00001
 
 
 ## CheckAccount

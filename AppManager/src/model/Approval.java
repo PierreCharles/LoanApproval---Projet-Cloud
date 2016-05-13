@@ -25,7 +25,7 @@ public class Approval {
 	/**
 	 * reponse of the approval value
 	 */
-	@JsonProperty("reponse") private String reponse;
+	@JsonProperty("response") private String response;
 
 	/**
 	 * Constructor of the class Bank account FOR JSON
@@ -36,13 +36,13 @@ public class Approval {
 	 * @param reponse
 	 */
 	@JsonCreator
-	public Approval(@JsonProperty("lastName")String lastName, @JsonProperty("firstName")String firstName, @JsonProperty("id")String id, @JsonProperty("reponse")String reponse) 
+	public Approval(@JsonProperty("lastName")String lastName, @JsonProperty("firstName")String firstName, @JsonProperty("id")String id, @JsonProperty("response")String response) 
 	{
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.id = id;
-		this.reponse = reponse;
+		this.response = response;
 	}
 
 
@@ -78,11 +78,11 @@ public class Approval {
 
 	public String getResponse() 
 	{
-		return reponse;
+		return response;
 	}
 
 	public void setResponse(String reponse) 
 	{
-		this.reponse = reponse;
+		this.response = reponse;
 	}	
 }
