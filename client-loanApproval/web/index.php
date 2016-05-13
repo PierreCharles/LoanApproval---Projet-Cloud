@@ -2,7 +2,7 @@
 require_once '../vendor/autoload.php'; 
 
 $app = new Silex\Application();
-$app['debug'] = true;
+$app['debug'] = false;
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views/',
