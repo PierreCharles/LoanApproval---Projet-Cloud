@@ -21,29 +21,24 @@ For testing JSON rweb service result, in a terminal, try these commands:
 
 - Add an approval with POST methode:
 
-
-curl -XPOST -H 'Content-Type:application/json' -d '{ "firstName": "Pierre UPDATE","lastName": "CHARLES UPDATE","id": "00001","response": "approved"}' http://1-dot-appmanager-1280.appspot.com/rest/approval/updateApproval
+`curl -XPOST -H 'Content-Type:application/json' -d '{ "firstName": "Pierre UPDATE","lastName": "CHARLES UPDATE","id": "00001","response": "approved"}' http://1-dot-appmanager-1280.appspot.com/rest/approval/updateApproval`
 
 - Update an approval with POST methode:
 
-
-curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre","lastName": "Charles","id": "00001","response": "approved"}' http://1-dot-appmanager-1280.appspot.com/rest/approval/createApproval
+`curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre","lastName": "Charles","id": "00001","response": "approved"}' http://1-dot-appmanager-1280.appspot.com/rest/approval/createApproval`
 
 
 - Get list approvals with GET methode:
 
-
-curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/getApprovals
+`curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/getApprovals`
 
 - Get approval by id with GET methode:
 
-
-curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/getApproval/00001
+`curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/getApproval/00001`
 
 - Deleting an approval by id with GET methode:
 
-
-curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/deleteApproval/00001
+`curl -i -H Accept:application/json -X GET http://1-dot-appmanager-1280.appspot.com/rest/approval/deleteApproval/00001`
 
 
 ## CheckAccount
