@@ -41,8 +41,8 @@ public class Persistance {
 			Entity entityApproval = new Entity("id", approval.getId());
 			entityApproval.setProperty("lastName",approval.getLastName());
 			entityApproval.setProperty("firstName",approval.getFirstName());
-			entityApproval.setProperty("account",approval.getId());
-			entityApproval.setProperty("risk",approval.getResponse());
+			entityApproval.setProperty("id",approval.getId());
+			entityApproval.setProperty("response",approval.getResponse());
 			
 			Date dateAdd = new Date();
 			entityApproval.setProperty("dateAdd", dateAdd);
