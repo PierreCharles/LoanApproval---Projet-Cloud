@@ -25,7 +25,7 @@ public class LoanApproval {
 
     public static final int URL_APPMANAGER = "";
 
-    public static final int URL_CHECKACCOUNT = "";
+    public static final int URL_CHECKACCOUNT = "https://afternoon-everglades-21216.herokuapp.com/checkaccount";
 
     /**
      * Methode for check is an account is "low" or "hight" -> Call AccManager service
@@ -34,14 +34,15 @@ public class LoanApproval {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{params}")
-    public Response creditRequestById(@PathParam("params") String params) 
+    @Path("creditrequest/{idAccount}/{soldAccount}")
+    public Response creditRequest(@PathParam("idAccount") String idAccount, @PathParam("soldAccount") String soldAccount) 
     {
         try {
-            int id = Integer.parseInt(sold);
+            int id = Integer.parseInt(idAccount);
+            int sold = Integer.parseInt(soldAccount);
             if(sold<SOLD)
             {
-                JSONObject json  =  getDataRequestFromService(URL_CHECKACCOUNT+"/"+id);
+                JSONObject json  =  getDataRequestFromService(URL_CHECKACCOUNT+"/checkrisk/"+id);
                 
                 if(json.get("response")=="high"){
                     JSONObject json =  getDataRequestFromService(URL_APPMANAGER+"/"+id));
@@ -67,7 +68,7 @@ public class LoanApproval {
      */
     private JSONObject getDataRequestFromService(String urlService){
             Client client = Client.create();
-            WebResource webResource = client.resource(urlService;
+            WebResource webResource = client.resource(urlService);
             ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 
             if (response.getStatus() != 200) 

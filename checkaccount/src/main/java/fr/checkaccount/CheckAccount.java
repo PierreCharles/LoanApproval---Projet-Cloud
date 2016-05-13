@@ -29,6 +29,7 @@ import org.json.simple.JSONObject;
 @Path("checkaccount")
 public class CheckAccount {
 
+//	public static final String URL_ACCMANAGER = "https://1-dot-accmanager-1294.appspot.com/rest/bankAccount/getAccount";
 	public static final String URL_ACCMANAGER = "https://afternoon-everglades-21216.herokuapp.com/checkaccount/tempcheck";
 
 	/**
