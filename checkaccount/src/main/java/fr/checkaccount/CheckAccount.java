@@ -30,6 +30,7 @@ import org.json.simple.JSONObject;
 public class CheckAccount {
 
 	public static final String URL_ACCMANAGER = "https://afternoon-everglades-21216.herokuapp.com/checkaccount/tempcheck";
+//	public static final String URL_ACCMANAGER = "http://1-dot-accmanager-1294.appspot.com/rest/bankAccount/getAccount";
 
 	/**
 	 * Methode for check is an account is "low" or "hight" -> Call AccManager service
@@ -65,7 +66,6 @@ public class CheckAccount {
 	}
 
 	// TEMPORAIRE pour les tests
-
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("tempcheck/{idAccount}")
