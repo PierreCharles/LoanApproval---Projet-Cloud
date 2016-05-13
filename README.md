@@ -19,9 +19,9 @@ AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/
 
 For testing JSON rweb service result, in a terminal, try these commands:
 
- Add an approval with POST methode:
+Add an approval with POST methode:
 
-curl -XPOST -H 'Content-Type:application/json' -d '{ "firstName": "Pierre UPDATE","lastName": "CHARLES UPDATE","id": "00001","response": "approved"}' http://1-dot-appmanager-1280.appspot.com/rest/approval/updateApproval
+    curl -XPOST -H 'Content-Type:application/json' -d '{ "firstName": "Pierre UPDATE","lastName": "CHARLES UPDATE","id": "00001","response": "approved"}' http://1-dot-appmanager-1280.appspot.com/rest/approval/updateApproval
 
 Update an approval with POST methode:
 
