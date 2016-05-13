@@ -17,11 +17,11 @@ The accManager is a webservice CRUD on bank account, allow to Create, Read, Upda
 
 Add an account with POST methode:
 
-    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre-UPDATED","lastName": "Charles-UPDATED","account": "00002","amount": "10000","risk": "true"}' http://accmanager-1294.appspot.com/rest/bankAccount/createAccount
+    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Julien","lastName": "BRAT","account": "00001","amount": "10000","risk": "true"}' http://accmanager-1294.appspot.com/rest/bankAccount/createAccount
 
 Update an account with POST methode:
 
-    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre-UPDATED","lastName": "Charles-UPDATED","account": "00002","amount": "10000","risk": "true"}' http://accmanager-1294.appspot.com/rest/bankAccount/updateAccount
+    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre","lastName": "Charles","account": "00001","amount": "10000","risk": "true"}' http://accmanager-1294.appspot.com/rest/bankAccount/updateAccount
 
  Get list accounts with GET methode:
 
