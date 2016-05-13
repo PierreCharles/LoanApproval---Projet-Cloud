@@ -5,6 +5,8 @@ Implémenter sous forme de services le Loan approval (demande de crédit).
 
 ## AccManager
 
+AppManager is deploying here : http://accmanager-1294.appspot.com
+
 The accManager is a webservice CRUD on bank account, allow to Create, Read, Update, Delete accounts with a firstName, lastName, account id, amount of the account and the risk 
 
 - /getAccounts --> method to return all the accounts
