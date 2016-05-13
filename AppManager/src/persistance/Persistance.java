@@ -14,6 +14,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
+
 import exceptions.PersistanceAddException;
 import exceptions.PersistanceDeleteException;
 import exceptions.PersistanceSelectException;
@@ -22,83 +23,109 @@ import model.Approval;
 
 public class Persistance {
 	
+	/**
+	 * The datastore Object
+	 */
 	private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 	
 	/**
-	 * Method for persist an approval in the Datastore
+	 * Method to persist an approval in the Datastore
+	 * 
 	 * @param approval
+	 * 
 	 * @throws Exception
 	 */
 	public void persist(Approval approval) throws PersistanceAddException
 	{
 		try {
-			Entity entityApproval = new Entity("approval", approval.getName());
-			entityApproval.setProperty("name",approval.getName());
-			entityApproval.setProperty("manualResponse",approval.getManualResponse());
-
+			Entity entityApproval = new Entity("id", approval.getId());
+			entityApproval.setProperty("lastName",approval.getLastName());
+			entityApproval.setProperty("firstName",approval.getFirstName());
+			entityApproval.setProperty("account",approval.getId());
+			entityApproval.setProperty("risk",approval.getResponse());
+			
 			Date dateAdd = new Date();
 			entityApproval.setProperty("dateAdd", dateAdd);
 			
 			datastore.put(entityApproval);
 		} catch (Exception e) {
-			throw new PersistanceAddException("Error in the insertion or update of the approval");
+			throw new PersistanceAddException("Error in the insertion or update of the account");
 		}
 	}
 	
 	/**
-	 * Method for delete an approval with his Id
+	 * Method to delete an approval with his Id
+	 * 
 	 * @param approvalId
+	 * 
 	 * @throws PersistanceDeleteException
 	 */
 	public void deleteApprovalById(String approvalId) throws PersistanceDeleteException 
 	{
-		Key keyApproval = KeyFactory.createKey("approval", approvalId);
+		Key keyApproval = KeyFactory.createKey("id", approvalId);
+		
 		try {
 			datastore.delete(keyApproval);
 		} catch (Exception e){
-			throw new PersistanceDeleteException("Error when you try delete the approval :" + approvalId);
+			throw new PersistanceDeleteException("Error when you try delete the account :" + approvalId);
 		}
 		
 	}
 	
 	/**
-	 * Method for get an approval with his Id
+	 * Method to get an approval with his Id
+	 * 
 	 * @param approvalId
-	 * @return approval
+	 * 
+	 * @return Approval
+	 * 
 	 * @throws PersistanceNotFoundException
 	 */
 	public Approval getApprovalById(String approvalId) throws PersistanceNotFoundException
 	{
-		Key keyApproval = KeyFactory.createKey("approval", approvalId);
+		Key keyApproval = KeyFactory.createKey("id", approvalId);
 		try {
-			Entity entityApproval = datastore.get(keyApproval);
-			return new Approval((String)entityApproval.getProperty("name"),(String)entityApproval.getProperty("manualResponse"));
+			Entity entityAccount = datastore.get(keyApproval);
+			return new Approval((String)entityAccount.getProperty("lastName"), 
+								   (String)entityAccount.getProperty("firstName"), 
+								   (String)entityAccount.getProperty("id"), 
+								   (String)entityAccount.getProperty("response"));
 		} catch (Exception e) {
 			throw new PersistanceNotFoundException("The approval " + approvalId + " can't be find");
 		}	
 	}
 	
 	/**
-	 * Method for get all the approvals
+	 * Method to get all the approvals
+	 * 
 	 * @return List<Approval>
+	 * 
 	 * @throws PersistanceSelectException 
 	 */
 	public List<Approval> getApprovals() throws PersistanceSelectException, PersistanceNotFoundException
 	{
 		List<Approval> approvalsList = new ArrayList<Approval>();
+		
 		Query query = new Query("approval").addSort("dateAdd", SortDirection.DESCENDING);
+		
         try {
 			List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
+			
 	        for (Entity result : results) {
-	        	approvalsList.add(new Approval((String)result.getProperty("name"),(String)result.getProperty("manualResponse")));	
+	        	approvalsList.add(new Approval((String)result.getProperty("lastName"), 
+						   						(String)result.getProperty("firstName"), 
+						   						(String)result.getProperty("id"), 
+						   						(String)result.getProperty("response")));	
 	        }
+	        
 	        if (approvalsList.size() == 0) {
 	        	throw new PersistanceNotFoundException("There is nobody approvals actualy");
 	        }
+	        
 	        return approvalsList;
 			
         } catch (Exception e) {
-        	throw new PersistanceSelectException("An error attempt when you try to get all the approvals");
+        	throw new PersistanceSelectException("An error attempt when you try to get all the approvals, maybe there is no approvals actually");
         }
 	}	
 }
