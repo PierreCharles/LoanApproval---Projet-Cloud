@@ -11,7 +11,11 @@ $(document).ready(function() {
     $('.submitLoan').on('click', addLoan);
 });
 
+/**
+ * Method to add a Loan with an AJAX POST Json
+ */
 function addLoan() {
+    // Webservice url
     var urlService = "https://intense-everglades-81868.herokuapp.com/loanapproval/creditrequest";
     
     var loan = {

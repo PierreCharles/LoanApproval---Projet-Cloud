@@ -11,12 +11,18 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 use \Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Home page loanApproval
+ */
 $app->get('/loanApproval', function() use($app) {
     return $app['twig']->render('form.html.twig', array(
         'path_web' => __DIR__
     ));
 });
 
+/**
+ * Load the page for the login
+ */
 $app->get('/loanApproval/login', function() use($app) {
     
     return $app['twig']->render('login.html.twig', array(
@@ -26,6 +32,9 @@ $app->get('/loanApproval/login', function() use($app) {
     ));   
 });
 
+/**
+ * Method post to allow or refuse the connection
+ */
 $app->post('/loanApproval/login', function(Request $request) use($app) {
     if (empty($request->get('login')) || empty($request->get('password'))) {
         return $app['twig']->render('login.html.twig', array(
@@ -52,6 +61,9 @@ $app->post('/loanApproval/login', function(Request $request) use($app) {
     } 
 });
 
+/**
+ * Access to the admin page with all the actions for the accounts
+ */
 $app->get('/loanApproval/admin', function() use($app) {
     if ($app['session']->get('user')['user'] == 'admin' && $app['session']->get('user')['password'] == 'admin') {
         return $app['twig']->render('admin.html.twig',array());
@@ -63,6 +75,9 @@ $app->get('/loanApproval/admin', function() use($app) {
     }   
 });
 
+/**
+ * Method to disconnect
+ */
 $app->get('loanApproval/disconnect', function() use($app) {
     $app['session']->set('user',array());
     return $app->redirect('/loanApproval');

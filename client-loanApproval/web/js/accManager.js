@@ -5,6 +5,10 @@ $(document).ready(function() {
     $('.refresh').on('click',refreshAccounts);
     
     $('.addAccount').on('click', function() {
+        $(':input','#form-account-add')
+        .not(':button, :submit, :reset, :hidden')
+        .val('');
+
         $('.formAccount').fadeToggle('slow');
     });
     
@@ -16,8 +20,11 @@ $(document).ready(function() {
     
 });
 
+/**
+ * Method to refresh the list of the accounts with an Ajax request
+ */
 function refreshAccounts() {
-    
+    // WebserviceUrl
     var urlService = "http://accmanager-1294.appspot.com/rest/bankAccount/";
     
     $.ajax({ 
@@ -77,6 +84,9 @@ function refreshAccounts() {
     });
 }
 
+/**
+ * Method to save an account, POST Json to the webservice with Ajax
+ */
 function saveAccount() {
     var urlService = "http://accmanager-1294.appspot.com/rest/bankAccount/";
     
