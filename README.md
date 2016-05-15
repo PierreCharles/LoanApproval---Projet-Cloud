@@ -1,9 +1,37 @@
 # LoanApproval---Projet-Cloud
 -------
+Implementation of Loan Approval services 
 
-Implémenter sous forme de services le Loan approval (demande de crédit).
+
+## Client 
+
+Realized by Julien
+
+The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
+
+Use Chrome plug-in 'enable cross-origin' to disable : Access-Control-Allow-Origin --> CORS when try to post informations.
+
+To run the client :
+
+Go into client-loanApproval directory:
+
+    cd client-loanApproval/
+
+Install all dependencies:
+
+    composer install
+
+Run a server:
+
+    php -S localhost:8080 -t web/
+
+Launch a web page:
+
+Go to http://localhost:8080/loanApproval. Connect into admin interface with login "admin" and password "admin"
 
 ## AccManager
+
+Realized by Julien
 
 AppManager is deploying here : http://accmanager-1294.appspot.com
 
@@ -36,6 +64,8 @@ Deleting an account by id with GET methode:
     curl -i -H Accept:application/json -X GET http://accmanager-1294.appspot.com/rest/bankAccount/deleteAccount/00001
 
 ## AppManager
+
+Realized by Pierre
 
 AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/
 
@@ -72,6 +102,8 @@ Deleting an approval by id with GET methode:
 
 ## CheckAccount
 
+Realized by Pierre
+
 CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.herokuapp.com/checkaccount/checkrisk/1000
 
 Commande for create the checkaccount web service with maven and deploying into heroku :
@@ -95,6 +127,8 @@ Commande for create the checkaccount web service with maven and deploying into h
 
 ## LoanApproval
 
+Realized by Julien and Pierre
+
 LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.herokuapp.com/myresource
 
     mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=fr.loanapproval -DartifactId=loanapproval -Dpackage=fr.loanapproval -DarchetypeVersion=2.22.2
@@ -114,7 +148,3 @@ LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.hero
     git push heroku master
 
 
-## Client
-
-The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
-Utilisation d'un plugin Chrome 'enable cross-origin' pour éviter les soucis : Access-Control-Allow-Origin --> CORS when try to post informationsO
