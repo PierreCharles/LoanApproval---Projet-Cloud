@@ -26,7 +26,7 @@ Run a server:
 
 Launch a web page:
 
-Go to http://localhost:8080/loanApproval
+Go to [http://localhost:8080/loanApproval](http://localhost:8080/loanApproval)
 
 Connect into admin interface with login "admin" and password "admin"
 
