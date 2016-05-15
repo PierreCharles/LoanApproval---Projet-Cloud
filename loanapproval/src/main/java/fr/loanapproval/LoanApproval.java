@@ -82,13 +82,13 @@ public class LoanApproval {
                 JSONObject json  =  getDataRequestFromService(URL_CHECKACCOUNT+"/checkrisk/"+id);
                 
                 if(json.get("response")=="high"){
-                    JSONObject json =  getDataRequestFromService(URL_APPMANAGER+"/"+id));
+                    JSONObject json =  getDataRequestFromService(URL_APPMANAGER+"/"+id);
                     String output = "{\"response\":\""+json.get("manualResponse")+"\"}";
                 } else {
                     String output = "{\"response\":\"approved\" , \"account\" : \" \"}";
                 }   
             } else {
-                JSONObject json  getDataRequestFromService(URL_APPMANAGER+"/"+id));
+                JSONObject json = getDataRequestFromService(URL_APPMANAGER+"/"+id);
                 String output = "{\"response\":\""+json.get("manualResponse")+"\"}";
             }    
             return Response.status(200).entity(output).build();
