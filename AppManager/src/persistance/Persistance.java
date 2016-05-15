@@ -21,6 +21,9 @@ import exceptions.PersistanceSelectException;
 import exceptions.PersistanceNotFoundException;
 import model.Approval;
 
+/**
+ * Class Persistance which allow to go some actions in the Datastore
+ */
 public class Persistance {
 	
 	/**

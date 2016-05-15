@@ -22,6 +22,9 @@ import exceptions.PersistanceNotFoundException;
 import model.Approval;
 import persistance.Persistance;
 
+/**
+ * Approval Service Class
+ */
 @Path("/approval")
 public class AppManager {
 	/**

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Class Approval
+ */
 @JsonIgnoreProperties(ignoreUnknown=true) 
 public class Approval {
 
@@ -23,7 +26,7 @@ public class Approval {
 	@JsonProperty("id") private String id;
 	
 	/**
-	 * reponse of the approval value
+	 * response of the approval value
 	 */
 	@JsonProperty("response") private String response;
 
