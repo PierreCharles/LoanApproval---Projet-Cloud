@@ -15,14 +15,26 @@ $(document).ready(function() {
  * Method to add a Loan with an AJAX POST Json
  */
 function addLoan() {
-    // Webservice url
-    var urlService = "https://intense-everglades-81868.herokuapp.com/loanapproval/creditrequest";
     
-    var loan = {
-        lastName:$('#lastName').val(),
-        firstName:$('#firstName').val(),
-        amount:parseFloat($('#amountLoan').val())
-    };
+    
+    if(!$('#accountId').val()) {
+        var loan = {
+            lastName:$('#lastName').val(),
+            firstName:$('#firstName').val(),
+            sold:parseFloat($('#amountLoan').val())
+        };
+        
+        // Webservice url
+        var urlService = "https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestByName";
+    } else {
+        var loan = {
+            idAccount:parseInt($('#accountId').val()),
+            sold:parseFloat($('#amountLoan').val())
+        }
+        
+        // Webservice url
+        var urlService = "https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestById";
+    }
     
     $.ajax({
         url : urlService,
