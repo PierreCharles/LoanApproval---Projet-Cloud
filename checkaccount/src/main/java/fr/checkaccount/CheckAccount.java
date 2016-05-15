@@ -29,11 +29,16 @@ import org.json.simple.JSONObject;
 @Path("checkaccount")
 public class CheckAccount {
 
+	/**
+	 * Url of the acc manager service
+	 */
 	public static final String URL_ACCMANAGER = "https://1-dot-accmanager-1294.appspot.com/rest/bankAccount/getAccount";
 
 	/**
 	 * Methode for check is an account is "low" or "hight" -> Call AccManager service
+	 * 
 	 * @param idAccount
+	 * 
 	 * @return Response Json {"responses" : risk} 
 	 */
 	@GET
@@ -44,12 +49,10 @@ public class CheckAccount {
        	try {
        		int id = Integer.parseInt(idAccount);
 
-			//JSONObject json =  getDataRequestFromService(URL_ACCMANAGER+"/"+id);
-			//String output = "{\"response\":\""+json.get("risk")+"\"}";
-
-            String output = "{\"response\":\"test\"}";
+			JSONObject accountJson =  getDataRequestFromService(URL_ACCMANAGER+"/"+id);
+			String output = "{\"response\":\""+json.getString("risk")+"\"}";
+			
 			return Response.status(200).entity(output).build();
-
 	    } catch (Exception e) {
 	  		String output = "{'error':'"+e.getMessage()+"'}";	
 			return Response.status(204).entity(output).build();
@@ -67,11 +70,12 @@ public class CheckAccount {
             WebResource webResource = client.resource(urlService);
             ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 
-            if (response.getStatus() != 200) 
+            if (response.getStatus() != 200) {
                throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
-
+            }
+            
             String entity = response.getEntity(String.class);
-            return (JSONObject) new JSONParser().parse(entity);
+            return (JSONObject) new JSONObject(entity);
     }
 	
     /**
