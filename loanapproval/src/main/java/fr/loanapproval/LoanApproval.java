@@ -75,7 +75,8 @@ public class LoanApproval {
      */
     public Response creditrequest(int id, int sold)
     {
-        try {
+        try 
+        {
             if(sold<SOLD)
             {
                 JSONObject json  =  getDataRequestFromService(URL_CHECKACCOUNT+"/checkrisk/"+id);
@@ -112,7 +113,8 @@ public class LoanApproval {
      * @param url to service
      * @return a JSON string
      */
-    public JSONObject getDataRequestFromService(String urlService){
+    public JSONObject getDataRequestFromService(String urlService) throws ParseException
+    {
             Client client = Client.create();
             WebResource webResource = client.resource(urlService);
             ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
@@ -121,8 +123,7 @@ public class LoanApproval {
                throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
 
             String entity = response.getEntity(String.class);
-            JSONObject json =  (JSONObject) new JSONParser().parse(entity);
-            return json;
+            return (JSONObject) new JSONParser().parse(entity);
     }
 
     

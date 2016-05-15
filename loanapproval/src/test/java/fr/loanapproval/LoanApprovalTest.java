@@ -13,7 +13,8 @@ import fr.loanapproval.MyResource;
 public class MyResourceTest extends JerseyTest {
 
     @Override
-    protected Application configure() {
+    protected Application configure() 
+    {
         return new ResourceConfig(MyResource.class);
     }
 
@@ -21,9 +22,10 @@ public class MyResourceTest extends JerseyTest {
      * Test to see that the message "Got it!" is sent in the response.
      */
     @Test
-    public void testGetIt() {
-        final String responseMsg = target().path("myresource").request().get(String.class);
-
-        assertEquals("Hello, Heroku!", responseMsg);
+    public void testGetIt() 
+    {
+        final String responseMsg = target().path("checkaccount").request().get(String.class);
+        assertEquals("", responseMsg);
     }
+
 }
