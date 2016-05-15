@@ -11,6 +11,14 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.nio.charset.Charset;
+
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.json.simple.JSONObject;
@@ -23,23 +31,51 @@ public class LoanApproval {
 
     public static final int SOLD = 10000;
 
-    public static final int URL_APPMANAGER = "";
+    public static final String URL_ACCMANAGER = "https://1-dot-accmanager-1294.appspot.com/rest/bankAccount";
+
+    public static final int URL_APPMANAGER = "http://1-dot-appmanager-1280.appspot.com/rest/approval";
 
     public static final int URL_CHECKACCOUNT = "https://afternoon-everglades-21216.herokuapp.com/checkaccount";
 
     /**
-     * Methode for check is an account is "low" or "hight" -> Call AccManager service
-     * @param idAccount
-     * @return Response Json {"responses" : risk} 
+     * Methode for check query credit with a firstName a lastName and a sold
+     * @param  lastName, firstName and a sold
+     * @return Response Json 
      */
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("creditrequest/{idAccount}/{soldAccount}")
-    public Response creditRequest(@PathParam("idAccount") String idAccount, @PathParam("soldAccount") String soldAccount) 
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("creditRequestByName")
+    public Response creditRequestByName(String params) 
+    {
+        JSONObject json = new JSONParser().parse(params);
+        int id = getIdFromAccManager(json.get("lastName"), json.get("firstName"));
+        return creditrequest(id, json.get("sold"));
+    }
+
+    /**
+     * Methode for check query credit with an id and a sold
+     * @param id account and sold
+     * @return Response Json 
+     */
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("creditRequestById")
+    public Response creditRequestBtId(String params) 
+    {
+        JSONObject json = new JSONParser().parse(params);
+        return creditrequest(json.get("id"), json.get("sold"));
+    }
+
+    /**
+     * Methode for check the query credit
+     * @param id account and sold
+     * @return Response Json 
+     */
+    public Response creditrequest(int id, int sold)
     {
         try {
-            int id = Integer.parseInt(idAccount);
-            int sold = Integer.parseInt(soldAccount);
             if(sold<SOLD)
             {
                 JSONObject json  =  getDataRequestFromService(URL_CHECKACCOUNT+"/checkrisk/"+id);
@@ -62,11 +98,21 @@ public class LoanApproval {
     }
 
     /**
+     * Methode for get id of account with a lastName and a firstName from a web service AccManager
+     * @param  lastName and the firstName
+     * @return a id
+     */
+    public int getIdFromAccManager(String lastName, String firstName)
+    {
+        return 0;
+    }
+
+    /**
      * Methode for get Data from a web service by an Url
      * @param url to service
      * @return a JSON string
      */
-    private JSONObject getDataRequestFromService(String urlService){
+    public JSONObject getDataRequestFromService(String urlService){
             Client client = Client.create();
             WebResource webResource = client.resource(urlService);
             ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);

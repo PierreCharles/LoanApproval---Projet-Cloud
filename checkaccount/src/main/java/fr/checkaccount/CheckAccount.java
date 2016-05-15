@@ -29,8 +29,7 @@ import org.json.simple.JSONObject;
 @Path("checkaccount")
 public class CheckAccount {
 
-//	public static final String URL_ACCMANAGER = "https://1-dot-accmanager-1294.appspot.com/rest/bankAccount/getAccount";
-	public static final String URL_ACCMANAGER = "https://afternoon-everglades-21216.herokuapp.com/checkaccount/tempcheck";
+	public static final String URL_ACCMANAGER = "https://1-dot-accmanager-1294.appspot.com/rest/bankAccount/getAccount";
 
 	/**
 	 * Methode for check is an account is "low" or "hight" -> Call AccManager service
@@ -43,46 +42,34 @@ public class CheckAccount {
 	public Response checkRisk(@PathParam("idAccount") String idAccount) 
 	{
        	try {
-
        		int id = Integer.parseInt(idAccount);
-			Client client = Client.create();
-			WebResource webResource = client.resource(URL_ACCMANAGER+"/"+id);
-			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
-
-			if (response.getStatus() != 200) 
-			   throw new RuntimeException("Failed : HTTP error code : "	+ response.getStatus());
-
-			String entity = response.getEntity(String.class);
-			JSONObject json =  (JSONObject) new JSONParser().parse(entity);
+			JSONObject json =  getDataRequestFromService(URL_ACCMANAGER+"/"+id);
 			String output = "{\"response\":\""+json.get("risk")+"\"}";
-
 			return Response.status(200).entity(output).build();
 
 	    } catch (Exception e) {
 	  		String output = "{'error':'"+e.getMessage()+"'}";	
 			return Response.status(204).entity(output).build();
 	    }
-
 	}
 
-	// TEMPORAIRE pour les tests
-
-	@GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("tempcheck/{idAccount}")
-    public Response tempCheck(@PathParam("idAccount") String idAccount) 
+	/**
+     * Methode for get Data from a web service by an Url
+     * @param url to service
+     * @return a JSON string
+     */
+    public JSONObject getDataRequestFromService(String urlService) throws ParseException, RuntimeException
     {
-        try {
-            String output = "{\"risk\":\"high\", \"test\":\"test\"}";
-            return Response.status(200).entity(output).build();
+            Client client = Client.create();
+            WebResource webResource = client.resource(urlService);
+            ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 
-        } catch (Exception e) {
-            String output = "{\"error\": \" "+e.getMessage()+" \"}";   
-            return Response.status(204).entity(output).build();
-        }
+            if (response.getStatus() != 200) 
+               throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
 
+            String entity = response.getEntity(String.class);
+            return (JSONObject) new JSONParser().parse(entity);
     }
-
 	
     /**
      * Method handling HTTP GET requests. The returned object will be sent
