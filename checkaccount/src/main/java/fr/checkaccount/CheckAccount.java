@@ -43,8 +43,11 @@ public class CheckAccount {
 	{
        	try {
        		int id = Integer.parseInt(idAccount);
-			JSONObject json =  getDataRequestFromService(URL_ACCMANAGER+"/"+id);
-			String output = "{\"response\":\""+json.get("risk")+"\"}";
+
+			//JSONObject json =  getDataRequestFromService(URL_ACCMANAGER+"/"+id);
+			//String output = "{\"response\":\""+json.get("risk")+"\"}";
+
+            String output = "{\"response\":\"test\"}";
 			return Response.status(200).entity(output).build();
 
 	    } catch (Exception e) {

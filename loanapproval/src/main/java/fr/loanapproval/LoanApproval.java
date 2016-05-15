@@ -1,8 +1,10 @@
 package fr.loanapproval;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
@@ -33,9 +35,9 @@ public class LoanApproval {
 
     public static final String URL_ACCMANAGER = "https://1-dot-accmanager-1294.appspot.com/rest/bankAccount";
 
-    public static final int URL_APPMANAGER = "http://1-dot-appmanager-1280.appspot.com/rest/approval";
+    public static final String URL_APPMANAGER = "http://1-dot-appmanager-1280.appspot.com/rest/approval";
 
-    public static final int URL_CHECKACCOUNT = "https://afternoon-everglades-21216.herokuapp.com/checkaccount";
+    public static final String URL_CHECKACCOUNT = "https://afternoon-everglades-21216.herokuapp.com/checkaccount";
 
     /**
      * Methode for check query credit with a firstName a lastName and a sold
@@ -75,6 +77,7 @@ public class LoanApproval {
      */
     public Response creditrequest(int id, int sold)
     {
+        String output = "";
         try 
         {
             if(sold<SOLD)
