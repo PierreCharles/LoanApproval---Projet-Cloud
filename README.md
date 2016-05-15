@@ -60,6 +60,7 @@ Get account by id with GET methode:
     curl -i -H Accept:application/json -X GET http://accmanager-1294.appspot.com/rest/bankAccount/getAccount/00001
 
 Get account by lastName and firstName POST method : 
+
     curl -i -H Accept:application/json -X POST http://accmanager-1294.appspot.com/rest/bankAccount/getAccountByProperty -H Content-Type:application/json -d '{"lastName": "BRAT", "firstName" : "Julien"}'
     
 Deleting an account by id with GET methode:
