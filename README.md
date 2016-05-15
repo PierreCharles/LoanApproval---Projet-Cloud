@@ -10,7 +10,7 @@ Realized by Julien
 The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
 Use Chrome plug-in 'enable cross-origin' to disable : Access-Control-Allow-Origin --> CORS when try to post informations.
 
-##### To run the client :
+#### To run the client :
 
 Go into client-loanApproval directory:
 
@@ -26,7 +26,8 @@ Run a server:
 
 Launch a web page:
 
-Go to http://localhost:8080/loanApproval. Connect into admin interface with login "admin" and password "admin"
+Go to http://localhost:8080/loanApproval
+Connect into admin interface with login "admin" and password "admin"
 
 ## AccManager
 
