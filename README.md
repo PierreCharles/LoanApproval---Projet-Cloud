@@ -2,6 +2,11 @@
 -------
 Implementation of Loan Approval services 
 
+Log in to AppEngine or Heroku :
+
+Login : projetcloud.loanapproval@gmail.com
+Password : projetcloud2016
+
 
 ## Client 
 
