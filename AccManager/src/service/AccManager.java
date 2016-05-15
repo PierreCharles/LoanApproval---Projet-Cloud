@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 import exceptions.PersistanceAddException;

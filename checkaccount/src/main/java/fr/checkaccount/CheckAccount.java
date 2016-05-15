@@ -50,7 +50,7 @@ public class CheckAccount {
        		int id = Integer.parseInt(idAccount);
 
 			JSONObject accountJson =  getDataRequestFromService(URL_ACCMANAGER+"/"+id);
-			String output = "{\"response\":\""+json.getString("risk")+"\"}";
+			String output = "{\"response\":\""+json.get("risk")+"\"}";
 			
 			return Response.status(200).entity(output).build();
 	    } catch (Exception e) {
@@ -75,7 +75,7 @@ public class CheckAccount {
             }
             
             String entity = response.getEntity(String.class);
-            return (JSONObject) new JSONObject(entity);
+            return (JSONObject) parser.parse(entity);
     }
 	
     /**
