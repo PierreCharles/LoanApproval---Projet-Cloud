@@ -36,7 +36,7 @@ Connect into admin interface with login "admin" and password "admin"
 
 Realized by Julien
 
-AppManager is deploying here : http://accmanager-1294.appspot.com
+AppManager is deploying here : https://1-dot-accmanager-1294.appspot.com/rest/bankAccount/
 
 The accManager is a webservice CRUD on bank account, allow to Create, Read, Update, Delete accounts with a firstName, lastName, account id, amount of the account and the risk 
 
@@ -70,7 +70,7 @@ Deleting an account by id with GET methode:
 
 Realized by Pierre
 
-AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/
+AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/rest/approval/
 
 The AppManager is a webservice CRUD on approval, allow to Create, Read, Update, Delete approvals with a firstName, lastName, id, response of the approval 
 
