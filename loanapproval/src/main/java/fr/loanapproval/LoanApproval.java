@@ -65,7 +65,7 @@ public class LoanApproval {
     public Response creditRequestBtId(String params) 
     {
         JSONObject json = new JSONParser().parse(params);
-        return creditrequest(json.get("id"), json.get("sold"));
+        return creditrequest(json.get("idAccount"), json.get("sold"));
     }
 
     /**
