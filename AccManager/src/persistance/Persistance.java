@@ -21,6 +21,9 @@ import exceptions.PersistanceSelectException;
 import exceptions.PersistanceNotFoundException;
 import model.BankAccount;
 
+/**
+ * Class to interact with the Datastore
+ */
 public class Persistance {
 	
 	/**
@@ -128,8 +131,6 @@ public class Persistance {
         }
 	
 	}
-	
-	
 	
 	/**
 	 * Method to get all the accounts

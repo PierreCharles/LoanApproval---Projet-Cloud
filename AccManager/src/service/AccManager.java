@@ -26,6 +26,9 @@ import exceptions.PersistanceNotFoundException;
 import model.BankAccount;
 import persistance.Persistance;
 
+/**
+ * The service AccManager
+ */
 @Path("/bankAccount")
 public class AccManager 
 {
@@ -100,7 +103,12 @@ public class AccManager
 	{
 		try {
 			JSONObject params = new JSONObject(inputJSON);
-	
+			
+			if (params.getString("lastName") == "" || params.getString("firstName") == "") {
+				String output =  "{\"error\":\"You need to write a lastName and a firstName\"}";
+				return Response.status(422).entity(output).header("Access-Control-Allow-Origin", "*").build();
+			}
+			
 			BankAccount account = (BankAccount)persistance.getAccountByProperty((String)params.getString("lastName"), (String)params.get("firstName"));
 			String output = converterJson.writeValueAsString(account);
 			
