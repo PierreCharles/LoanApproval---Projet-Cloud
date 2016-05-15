@@ -5,8 +5,6 @@ import javax.ws.rs.core.Application;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 
-
-
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -24,8 +22,10 @@ public class CheckAccountTest extends JerseyTest {
      */
     @Test
     public void testGetIt() {
-        String responseMsg ="";
-        String json = "";
-        assertEquals(json, responseMsg);
+        final String responseMsg = target().path("checkaccount").request().get(String.class);
+        assertEquals("", responseMsg);
     }
+
+
+
 }

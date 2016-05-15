@@ -1,11 +1,42 @@
 # LoanApproval---Projet-Cloud
 -------
+Implementation of Loan Approval services 
 
-Implémenter sous forme de services le Loan approval (demande de crédit).
+Log in to AppEngine or Heroku : Login : projetcloud.loanapproval@gmail.com Password : projetcloud2016
+
+
+## Client 
+
+Realized by Julien
+
+The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
+Use Chrome plug-in 'enable cross-origin' to disable : Access-Control-Allow-Origin --> CORS when try to post informations.
+
+#### Run the client :
+
+Go into client-loanApproval directory:
+
+    cd client-loanApproval/
+
+Install all dependencies:
+
+    composer install
+
+Run a server:
+
+    php -S localhost:8080 -t web/
+
+Launch a web page:
+
+Go to [http://localhost:8080/loanApproval](http://localhost:8080/loanApproval)
+
+Connect into admin interface with login "admin" and password "admin"
 
 ## AccManager
 
-AppManager is deploying here : http://accmanager-1294.appspot.com
+Realized by Julien
+
+AppManager is deploying here : https://1-dot-accmanager-1294.appspot.com/rest/bankAccount/
 
 The accManager is a webservice CRUD on bank account, allow to Create, Read, Update, Delete accounts with a firstName, lastName, account id, amount of the account and the risk 
 
@@ -37,7 +68,9 @@ Deleting an account by id with GET methode:
 
 ## AppManager
 
-AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/
+Realized by Pierre
+
+AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/rest/approval/
 
 The AppManager is a webservice CRUD on approval, allow to Create, Read, Update, Delete approvals with a firstName, lastName, id, response of the approval 
 
@@ -72,49 +105,30 @@ Deleting an approval by id with GET methode:
 
 ## CheckAccount
 
-CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.herokuapp.com/checkaccount/checkrisk/1000
+Realized by Pierre
 
-Commande for create the checkaccount web service with maven and deploying into heroku :
+CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.herokuapp.com/checkaccount/
 
-    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=fr.checkaccount -DartifactId=checkaccount -Dpackage=fr.checkaccount -DarchetypeVersion=2.22.2
+Test CheckAccount with this command line :
 
-    cd checkaccount
+/checkrisk --> method to return the risk of the account
 
-    mvn clean package
-
-    git init
-
-    heroku create
-
-    git add src/ pom.xml Procfile system.properties
-
-    git commit -m "Initial commit"
-
-    git push heroku master
+    curl -i -H Accept:application/json -X GET https://afternoon-everglades-21216.herokuapp.com/checkaccount/checkrisk/00001
 
 
 ## LoanApproval
 
-LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.herokuapp.com/myresource
+Realized by Julien and Pierre
 
-    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=fr.loanapproval -DartifactId=loanapproval -Dpackage=fr.loanapproval -DarchetypeVersion=2.22.2
+LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.herokuapp.com/loanapproval/
+Test this service with curl :
 
-    cd loanapproval
+/creditRequestByName :
 
-    mvn clean package
+    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre", "lastName" : "CHARLES", "sold" : 10000" }' https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestByName
 
-    git init
+/creditRequestById :
 
-    heroku create
-
-    git add src/ pom.xml Procfile system.properties
-
-    git commit -m "Initial commit"
-
-    git push heroku master
+    curl -XPOST -H 'Content-Type:application/json' -d '{"idAccount": "00001", "sold" : "11000"}' https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestById
 
 
-## Client
-
-The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
-Utilisation d'un plugin Chrome 'enable cross-origin' pour éviter les soucis : Access-Control-Allow-Origin --> CORS when try to post informationsO
