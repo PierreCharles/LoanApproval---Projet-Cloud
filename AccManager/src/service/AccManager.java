@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,7 +15,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 import exceptions.PersistanceAddException;
 import exceptions.PersistanceDeleteException;
@@ -81,6 +85,30 @@ public class AccManager
 			String output = "{\"error\":\"erreur de conversion en JSON\"}";
 			return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
 		}
+	}
+	
+	/**
+	 * Method to get an account with the lastName and firstName
+	 * 
+	 * @return BankAccount JSON
+	 */
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("getAccountByProperty/")
+	public Response getAccountWithProperty(String inputJSON)
+	{
+		try {
+			JSONObject params = new JSONObject(inputJSON);
+	
+			BankAccount account = (BankAccount)persistance.getAccountByProperty((String)params.getString("lastName"), (String)params.get("firstName"));
+			String output = converterJson.writeValueAsString(account);
+			
+			return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();			
+		} catch (Exception e) {
+			String output = "{\"error\":\""+e.getMessage()+"\"}";
+			return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
+		}	
 	}
 	
 	/**

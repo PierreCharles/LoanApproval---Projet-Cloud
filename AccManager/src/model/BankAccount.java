@@ -44,14 +44,13 @@ public class BankAccount {
 	@JsonCreator
 	public BankAccount(@JsonProperty("lastName")String lastName, @JsonProperty("firstName")String firstName, @JsonProperty("account")String account, @JsonProperty("amount")String amount, @JsonProperty("risk")String risk) 
 	{
-		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.account = account;
 		this.amount = Float.valueOf(amount.trim());
 		this.risk = risk;
 	}
-
+	
 	/**
 	 * Constructor basic of the class Bank account
 	 * 

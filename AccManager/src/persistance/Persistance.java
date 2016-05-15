@@ -100,6 +100,38 @@ public class Persistance {
 	}
 	
 	/**
+	 * Method to get an account with the lastName & firstName
+	 * 
+	 * @param lastName
+	 * @param firstName
+	 * 
+	 * @return BankAccount
+	 * 
+	 * @throws PersistanceSelectException
+	 */
+	public BankAccount getAccountByProperty(String lastName, String firstName) throws PersistanceSelectException 
+	{
+		Query query = new Query("account").setFilter(new Query.FilterPredicate("firstName", Query.FilterOperator.EQUAL, firstName)).setFilter(new Query.FilterPredicate("lastName", Query.FilterOperator.EQUAL, lastName));
+	
+		try {
+			List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
+		
+        	Double amount = (Double) results.get(0).getProperty("amount");
+        	return new BankAccount((String)results.get(0).getProperty("lastName"), 
+					   						(String)results.get(0).getProperty("firstName"), 
+					   						(String)results.get(0).getProperty("account"), 
+					   						(float)amount.floatValue(),
+					   						(String)results.get(0).getProperty("risk"));	
+	        
+        } catch (Exception e) {
+        	throw new PersistanceSelectException("An error attempt when you try to get the account, maybe there is no accounts actually for this parameters");
+        }
+	
+	}
+	
+	
+	
+	/**
 	 * Method to get all the accounts
 	 * 
 	 * @return List<BankAccount>
