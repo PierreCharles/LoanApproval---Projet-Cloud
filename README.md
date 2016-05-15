@@ -107,47 +107,28 @@ Deleting an approval by id with GET methode:
 
 Realized by Pierre
 
-CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.herokuapp.com/checkaccount/checkrisk/1000
+CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.herokuapp.com/checkaccount/
 
-Commande for create the checkaccount web service with maven and deploying into heroku :
+Test CheckAccount with this command line :
 
-    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=fr.checkaccount -DartifactId=checkaccount -Dpackage=fr.checkaccount -DarchetypeVersion=2.22.2
+/checkrisk --> method to return the risk of the account
 
-    cd checkaccount
-
-    mvn clean package
-
-    git init
-
-    heroku create
-
-    git add src/ pom.xml Procfile system.properties
-
-    git commit -m "Initial commit"
-
-    git push heroku master
+    curl -i -H Accept:application/json -X GET https://afternoon-everglades-21216.herokuapp.com/checkaccount/checkrisk/00001
 
 
 ## LoanApproval
 
 Realized by Julien and Pierre
 
-LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.herokuapp.com/myresource
+LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.herokuapp.com/loanapproval/
+Test this service with curl :
 
-    mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=fr.loanapproval -DartifactId=loanapproval -Dpackage=fr.loanapproval -DarchetypeVersion=2.22.2
+/creditRequestByName :
 
-    cd loanapproval
+    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre", "lastName" : "CHARLES", "sold" : 10000" }' https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestByName
 
-    mvn clean package
+/creditRequestById :
 
-    git init
-
-    heroku create
-
-    git add src/ pom.xml Procfile system.properties
-
-    git commit -m "Initial commit"
-
-    git push heroku master
+    curl -XPOST -H 'Content-Type:application/json' -d '{"idAccount": "00001", "sold" : "11000"}' https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestById
 
 
