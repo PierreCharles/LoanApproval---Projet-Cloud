@@ -8,10 +8,9 @@ Implementation of Loan Approval services
 Realized by Julien
 
 The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
-
 Use Chrome plug-in 'enable cross-origin' to disable : Access-Control-Allow-Origin --> CORS when try to post informations.
 
-To run the client :
+###### To run the client :
 
 Go into client-loanApproval directory:
 
