@@ -7,8 +7,6 @@ Log in to AppEngine or Heroku : Login : projetcloud.loanapproval@gmail.com Passw
 
 ## Client 
 
-Realized by Julien
-
 The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
 Use Chrome plug-in 'enable cross-origin' to disable : Access-Control-Allow-Origin --> CORS when try to post informations.
 
@@ -34,15 +32,14 @@ Connect into admin interface with login "admin" and password "admin"
 
 ## AccManager
 
-Realized by Julien
-
 AppManager is deploying here : https://1-dot-accmanager-1294.appspot.com/rest/bankAccount/
 
 The accManager is a webservice CRUD on bank account, allow to Create, Read, Update, Delete accounts with a firstName, lastName, account id, amount of the account and the risk 
 
 - /getAccounts --> method to return all the accounts
 - /createAccount --> method to create an account with JSON POST
-- /getAccount/{accountId} --> return to get an account with his ID in param
+- /getAccount/{accountId} --> return an account with his ID in param
+- /getAccountByProperty --> return an account with the lastName and firstName in param POST ( JSON datas)
 - /updateAccount --> method to update an account wich is send in POST or PUT HTTP Request
 - /deleteAccount/{idAccount} --> delete an account with his ID with GET or DELETE HTTP Request
 
@@ -62,13 +59,14 @@ Get account by id with GET methode:
 
     curl -i -H Accept:application/json -X GET http://accmanager-1294.appspot.com/rest/bankAccount/getAccount/00001
 
+Get account by lastName and firstName POST method : 
+    curl -i -H Accept:application/json -X POST http://accmanager-1294.appspot.com/rest/bankAccount/getAccountByProperty -H Content-Type:application/json -d '{"lastName": "BRAT", "firstName" : "Julien"}'
+    
 Deleting an account by id with GET methode:
 
     curl -i -H Accept:application/json -X GET http://accmanager-1294.appspot.com/rest/bankAccount/deleteAccount/00001
 
 ## AppManager
-
-Realized by Pierre
 
 AppManager is deploying here : http://1-dot-appmanager-1280.appspot.com/rest/approval/
 
@@ -105,8 +103,6 @@ Deleting an approval by id with GET methode:
 
 ## CheckAccount
 
-Realized by Pierre
-
 CheckAccount is deployed on Heroku here : https://afternoon-everglades-21216.herokuapp.com/checkaccount/
 
 Test CheckAccount with this command line :
@@ -117,8 +113,6 @@ Test CheckAccount with this command line :
 
 
 ## LoanApproval
-
-Realized by Julien and Pierre
 
 LoanApproval is deployed on Heroku here :  https://intense-everglades-81868.herokuapp.com/loanapproval/
 Test this service with curl :
