@@ -8,7 +8,7 @@ Log in to AppEngine or Heroku : Login : projetcloud.loanapproval@gmail.com Passw
 ## Client 
 
 The client is a simple interface with bootstrap and the framework Silex, allow to test the differents webservices. 
-Use Chrome plug-in 'enable cross-origin' to disable : Access-Control-Allow-Origin --> CORS when try to post informations.
+Use Chrome plug-in 'Allow-Control-Allow-Origin' to disable : Access-Control-Allow-Origin --> CORS when try to post informations.
 
 This plugin allows the user to add/update informations because the appengine of Google deny the request which come from other Origin, it's the only solution what we find
 
