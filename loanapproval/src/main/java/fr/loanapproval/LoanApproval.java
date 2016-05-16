@@ -70,12 +70,9 @@ public class LoanApproval {
         try 
         {
             JSONParser jsonParser = new JSONParser();
-
             JSONObject objectPeople = (JSONObject) jsonParser.parse(inputJSON);
-            String accountEntity = getIdFromAccManager((String) objectPeople.get("lastName"), (String) objectPeople.get("firstName"));
-            JSONObject jsonAccount = (JSONObject) jsonParser.parse(accountEntity);
-            System.out.println(jsonAccount.get("account"));
-            return creditrequest((String) jsonAccount.get("account"), (String) objectPeople.get("sold"));
+            String idAccount = getIdFromAccManager((String) objectPeople.get("lastName"), (String) objectPeople.get("firstName"));
+            return creditrequest(idAccount, (String) objectPeople.get("sold"));
         } catch (Exception e) {
             String output = "{'error':'" + e.getMessage() + "'}";   
             return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
@@ -104,7 +101,7 @@ public class LoanApproval {
             String output = "{'error':'" + e.getMessage() + "'}";   
             return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
         }
-    }
+    } 
 
     /**
      * Method for check the query credit
@@ -164,22 +161,20 @@ public class LoanApproval {
      * 
      * @return a idAccount
      */
-    public String getIdFromAccManager(String lastName, String firstName)
+    public String getIdFromAccManager(String lastName, String firstName) throws ParseException
     {
-        Client client = Client.create();
-        String urlTargetService =  URL_ACCMANAGER+"/"+"getAccountByProperty/";
-
-        System.out.println(urlTargetService);
-        WebResource webResource = client.resource(urlTargetService);
-        String params = "{\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\"}";
-        System.out.println(firstName+lastName);
-        ClientResponse response = webResource.type("application/json").post(ClientResponse.class,params);
-        System.out.println(response.getStatus());
-        if(response.getStatus()!=200){
-            throw new RuntimeException("HTTP Error: "+ response.getStatus());
-        }
-        System.out.println(response.getEntity(String.class));
-        return response.getEntity(String.class);
+            JSONParser jsonParser = new JSONParser();
+            Client client = Client.create();
+            String urlTargetService =  URL_ACCMANAGER+"/"+"getAccountByProperty/";
+            WebResource webResource = client.resource(urlTargetService);
+            String params = "{\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\"}";
+            ClientResponse response = webResource.type("application/json").post(ClientResponse.class,params);
+            if(response.getStatus()!=200)
+            {
+                throw new RuntimeException("HTTP Error: "+ response.getStatus());
+            }
+            JSONObject jsonAccount = (JSONObject) jsonParser.parse(response.getEntity(String.class));
+            return (String) jsonAccount.get("account");
     }
 
      
