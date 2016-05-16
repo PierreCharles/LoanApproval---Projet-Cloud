@@ -7,9 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import javax.ws.rs.client.ClientBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,11 +45,13 @@ public class CheckAccount {
 	public Response checkRisk(@PathParam("idAccount") String idAccount) 
 	{
        	try {
-       		int id = Integer.parseInt(idAccount);
-
-			JSONObject accountJson =  getDataRequestFromService(URL_ACCMANAGER+"/"+id);
-			String output = "{\"response\":\""+accountJson.get("risk")+"\"}";
-			
+            JSONParser jsonParser = new JSONParser();
+            String urlTargetService = URL_ACCMANAGER+"/"+idAccount;
+            String response = ClientBuilder.newClient().target(urlTargetService).request().get(String.class);
+            System.out.println(response);
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(response);
+            System.out.println(jsonObject.get("risk"));
+			String output = "{\"response\":\""+jsonObject.get("risk")+"\"}";
 			return Response.status(200).entity(output).build();
 	    } catch (Exception e) {
 	  		String output = "{'error':'"+e.getMessage()+"'}";	
@@ -59,30 +59,12 @@ public class CheckAccount {
 	    }
 	}
 
-	/**
-     * Methode for get Data from a web service by an Url
-     * @param url to service
-     * @return a JSON string
-     */
-    public JSONObject getDataRequestFromService(String urlService) throws ParseException, RuntimeException
-    {
-            Client client = Client.create();
-            WebResource webResource = client.resource(urlService);
-            ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
-
-            if (response.getStatus() != 200) {
-               throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
-            }
-
-            JSONParser jsonParser = new JSONParser();
-   
-            String entity = response.getEntity(String.class);
-            return (JSONObject) jsonParser.parse(entity);
-    }
 	
     /**
      * Method handling HTTP GET requests. The returned object will be sent
+     *
      * to the client as "json" media type.
+     *
      * @return String that will be returned as a json response.
      */
     @GET

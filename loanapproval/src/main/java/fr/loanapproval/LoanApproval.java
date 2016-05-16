@@ -9,9 +9,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.*;
+import javax.ws.rs.client.Invocation.Builder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -51,6 +51,7 @@ public class LoanApproval {
      */
     public static final String URL_CHECKACCOUNT = "https://afternoon-everglades-21216.herokuapp.com/checkaccount";
 
+
     /**
      * Methode for check query credit with a firstName a lastName and a sold
      *
@@ -64,10 +65,16 @@ public class LoanApproval {
     @Path("creditRequestByName")
     public Response creditRequestByName(String inputJSON) 
     {
-        JSONObject objectPeople = (JSONObject) parser.parse(inputJSON);
-        int idAccount = getIdFromAccManager((String) objectPeople.get("lastName"), (String) objectPeople.get("firstName"));
-        
-        return creditrequest(idAccount, (String) objectPeople.get("sold"));
+        try {
+            JSONParser jsonParser = new JSONParser();
+            JSONObject objectPeople = (JSONObject) jsonParser.parse(inputJSON);
+            String idAccount = getIdFromAccManager((String) objectPeople.get("lastName"), (String) objectPeople.get("firstName"));
+            return creditrequest(idAccount, (String) objectPeople.get("sold"));
+        } catch (Exception e) {
+            String output = "{'error':'" + e.getMessage() + "'}";   
+            return Response.status(204).entity(output).build();
+        }
+
     }
 
     /**
@@ -83,8 +90,14 @@ public class LoanApproval {
     @Path("creditRequestById")
     public Response creditRequestBtId(String inputJSON) 
     {
-        JSONObject objectAccount = parser.parse(inputJSON);
-        return creditrequest(json.get("idAccount"), json.get("sold"));
+        try {
+            JSONParser jsonParser = new JSONParser();
+            JSONObject objectAccount = (JSONObject) jsonParser.parse(inputJSON);
+            return creditrequest((String) objectAccount.get("idAccount"), (String) objectAccount.get("sold"));
+        } catch (Exception e) {
+            String output = "{'error':'" + e.getMessage() + "'}";   
+            return Response.status(204).entity(output).build();
+        }
     }
 
     /**
@@ -94,28 +107,48 @@ public class LoanApproval {
      * 
      * @return Response Json 
      */
-    public Response creditrequest(int idAcount, int sold)
+    public Response creditrequest(String idAccount, String sold)
     {
         String output = "";
+        int amount = Integer.parseInt(sold);   
         try 
         {
-            if (sold<SOLD) {
-                JSONObject objectAccount  =  getDataRequestFromService(URL_CHECKACCOUNT+"/checkrisk/"+idAccount);
-                
-                if (objectAccount.get("response") == "high") {
-                    JSONObject objectAccount =  getDataRequestFromService(URL_APPMANAGER+"/"+idAccount);
-                    String output = "{\"response\":\"" + objectAccount.get("manualResponse") + "\"}";
+
+            JSONParser jsonParser = new JSONParser();
+            if (amount<SOLD) {
+                JSONObject objectAccount = (JSONObject) jsonParser.parse(getRequestUrl(URL_CHECKACCOUNT+"/checkrisk/"+idAccount));
+                if (objectAccount.get("response") == "high") 
+                {
+                    JSONObject objectApproval = (JSONObject) jsonParser.parse(getRequestUrl(URL_APPMANAGER+"/getApproval/"+idAccount));
+                    output = "{\"response\":\"" + objectApproval.get("response") +"\"}";
                 } else {
-                    String output = "{\"response\":\"approved\" , \"account\" : \" \"}";
+                    output = "{\"response\":\"approved\"}";
                 }   
             } else {
-                JSONObject objectAccount = getDataRequestFromService(URL_APPMANAGER+"/"+idAccount);
-                String output = "{\"response\":\"" + objectAccount.get("manualResponse") + "\"}";
+                    JSONObject objectApproval = (JSONObject) jsonParser.parse(getRequestUrl(URL_APPMANAGER+"/getApproval/"+idAccount));
+                    output = "{\"response\":\"" + objectApproval.get("response") +"\"}";
             }    
             return Response.status(200).entity(output).build();
         } catch (Exception e) {
-            String output = "{'error':'" + e.getMessage() + "'}";   
+            output = "{'error':'" + e.getMessage() + "'}";   
             return Response.status(204).entity(output).build();
+        }
+    }
+
+
+    /**
+     * Methode for get Data from service with an URL
+     * 
+     * @param String url
+     * 
+     * @return String 
+     */
+    public String getRequestUrl(String urlTargetService)
+    {
+        try {
+            return ClientBuilder.newClient().target(urlTargetService).request().get(String.class);
+        } catch (Exception e) {
+            return "{'error':'" + e.getMessage() + "'}";   
         }
     }
 
@@ -126,46 +159,16 @@ public class LoanApproval {
      * 
      * @return a idAccount
      */
-    public int getIdFromAccManager(String lastName, String firstName)
+    public String getIdFromAccManager(String lastName, String firstName)
     {
-    	// A VERIFIER
-        ClientConfig clientConfig = new DefaultClientConfig();
-        clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
-        Client client = Client.create(clientConfig);
 
-        WebResource webResourcePost = client.resource(URL_ACCMANAGER);
-        response = webResourcePost.type("application/json").post(ClientResponse.class, (String) "{\"lastName\":\"" + lastName + "\",\"firstName\":\"" + firstName + "\"}");
-        
-        if (response.getStatus() != 200) {
-        	throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
-        }
-        responseContent = response.getEntity(String.class);
-        
-        JSONObject account = (JSONObject) parser.parse(responseContent);
-        
-        return Integer.parseInt((String) account.get('account'));
-        
-    }
-
-    /**
-     * Methode for get Data from a web service by an Url
-     * 
-     * @param url to service
-     * 
-     * @return a JSON string
-     */
-    public JSONObject getDataRequestFromService(String urlService) throws ParseException
-    {
-            Client client = Client.create();
-            WebResource webResource = client.resource(urlService);
-            ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
-
-            if (response.getStatus() != 200) {
-               throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
-            }
-            
-            String entity = response.getEntity(String.class);
-            return (JSONObject) parser.parse(entity);
+       String urlTargetService = URL_ACCMANAGER+"/getAccountByProperty/";
+       Client client = ClientBuilder.newClient();
+       WebTarget webTarget = client.target(urlTargetService);
+       String jsonString = "{\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\"}";
+       Builder builder = webTarget.request();
+       Response response = builder.post(Entity.json(jsonString));
+       return response.readEntity(String.class);
     }
 
     
