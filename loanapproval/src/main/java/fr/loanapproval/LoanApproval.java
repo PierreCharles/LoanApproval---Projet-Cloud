@@ -72,7 +72,7 @@ public class LoanApproval {
             return creditrequest(idAccount, (String) objectPeople.get("sold"));
         } catch (Exception e) {
             String output = "{'error':'" + e.getMessage() + "'}";   
-            return Response.status(204).entity(output).build();
+            return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
         }
 
     }
@@ -96,7 +96,7 @@ public class LoanApproval {
             return creditrequest((String) objectAccount.get("idAccount"), (String) objectAccount.get("sold"));
         } catch (Exception e) {
             String output = "{'error':'" + e.getMessage() + "'}";   
-            return Response.status(204).entity(output).build();
+            return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
         }
     }
 
@@ -128,10 +128,10 @@ public class LoanApproval {
                     JSONObject objectApproval = (JSONObject) jsonParser.parse(getRequestUrl(URL_APPMANAGER+"/getApproval/"+idAccount));
                     output = "{\"response\":\"" + objectApproval.get("response") +"\"}";
             }    
-            return Response.status(200).entity(output).build();
+            return Response.status(200).entity(output).header("Access-Control-Allow-Origin", "*").build();
         } catch (Exception e) {
             output = "{'error':'" + e.getMessage() + "'}";   
-            return Response.status(204).entity(output).build();
+            return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
         }
     }
 
