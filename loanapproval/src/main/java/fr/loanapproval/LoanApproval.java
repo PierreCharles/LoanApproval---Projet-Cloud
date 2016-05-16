@@ -26,7 +26,7 @@ import java.nio.charset.Charset;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.json.simple.JSONObject;
-
+ 
 /**
  * Root resource (exposed at "myresource" path)
  */
@@ -52,7 +52,7 @@ public class LoanApproval {
      * CheckAccount url Service
      */
     public static final String URL_CHECKACCOUNT = "https://afternoon-everglades-21216.herokuapp.com/checkaccount";
- 
+
 
     /**
      * Methode for check query credit with a firstName a lastName and a sold
@@ -70,8 +70,9 @@ public class LoanApproval {
         try {
             JSONParser jsonParser = new JSONParser();
             JSONObject objectPeople = (JSONObject) jsonParser.parse(inputJSON);
-            String idAccount = getIdFromAccManager(objectPeople.get("lastName").toString(), objectPeople.get("firstName").toString());
-            return creditrequest(idAccount, objectPeople.get("sold").toString());
+            String idAccount = getIdFromAccManager((String) objectPeople.get("lastName"), (String) objectPeople.get("firstName"));
+            System.out.println(idAccount);
+            return creditrequest(idAccount, (String) objectPeople.get("sold"));
         } catch (Exception e) {
             String output = "{'error':'" + e.getMessage() + "'}";   
             return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
@@ -167,7 +168,7 @@ public class LoanApproval {
         WebResource webResource = client.resource(urlTargetService);
         String params = "{\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\"}";
         ClientResponse response = webResource.type("application/json").post(ClientResponse.class,params);
-        if(response.getStatus()!=201){
+        if(response.getStatus()!=200){
             throw new RuntimeException("HTTP Error: "+ response.getStatus());
         }
         return response.getEntity(String.class);
