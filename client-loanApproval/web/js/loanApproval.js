@@ -16,7 +16,6 @@ $(document).ready(function() {
  */
 function addLoan() {
     
-    
     if(!$('#accountId').val()) {
         var loan = {
             lastName:$('#lastName').val(),
@@ -24,26 +23,30 @@ function addLoan() {
             sold:parseFloat($('#amountLoan').val())
         };
         
+        var params = JSON.stringify(loan);
         // Webservice url
         var urlService = "https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestByName";
     } else {
-        var loan = {
-            idAccount:parseInt($('#accountId').val()),
-            sold:parseFloat($('#amountLoan').val())
-        }
-        
+        var params = "{\"idAccount\":\""+$('#accountId').val()+"\", \"sold\" : \""+parseFloat($('#amountLoan').val())+"\"}";
         // Webservice url
         var urlService = "https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestById";
     }
-    
+    console.log(params,urlService);
     $.ajax({
         url : urlService,
         type : 'POST', 
-        data : JSON.stringify(loan),
+        data : params,
         contentType: 'application/json',
     }).done(function(data) {
-       if(data.response !== "" || data.response !== undefined) {
-            $('.errorLoan').text(data.response);
+        
+        if(data === undefined) {
+            $('.errorLoan').text("La demande de crédit a rencontré un problème");
+        }
+        
+        if(data.response !== "" || data.response !== undefined) {
+            if(data.response == "approved") {
+                $('.success').text("Votre demande de crédit est accepté");
+            }  
         } else {
             $('.errorLoan').text("La demande de crédit a rencontré un problème");
         }
