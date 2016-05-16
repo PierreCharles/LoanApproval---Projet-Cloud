@@ -10,8 +10,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.*;
-import javax.ws.rs.client.Invocation.Builder;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,7 +52,7 @@ public class LoanApproval {
      * CheckAccount url Service
      */
     public static final String URL_CHECKACCOUNT = "https://afternoon-everglades-21216.herokuapp.com/checkaccount";
-
+ 
 
     /**
      * Methode for check query credit with a firstName a lastName and a sold
@@ -68,8 +70,8 @@ public class LoanApproval {
         try {
             JSONParser jsonParser = new JSONParser();
             JSONObject objectPeople = (JSONObject) jsonParser.parse(inputJSON);
-            String idAccount = getIdFromAccManager((String) objectPeople.get("lastName"), (String) objectPeople.get("firstName"));
-            return creditrequest(idAccount, (String) objectPeople.get("sold"));
+            String idAccount = getIdFromAccManager(objectPeople.get("lastName").toString(), objectPeople.get("firstName").toString());
+            return creditrequest(idAccount, objectPeople.get("sold").toString());
         } catch (Exception e) {
             String output = "{'error':'" + e.getMessage() + "'}";   
             return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
@@ -113,7 +115,6 @@ public class LoanApproval {
         int amount = Integer.parseInt(sold);   
         try 
         {
-
             JSONParser jsonParser = new JSONParser();
             if (amount<SOLD) {
                 JSONObject objectAccount = (JSONObject) jsonParser.parse(getRequestUrl(URL_CHECKACCOUNT+"/checkrisk/"+idAccount));
@@ -161,14 +162,15 @@ public class LoanApproval {
      */
     public String getIdFromAccManager(String lastName, String firstName)
     {
-
-       String urlTargetService = URL_ACCMANAGER+"/getAccountByProperty/";
-       Client client = ClientBuilder.newClient();
-       WebTarget webTarget = client.target(urlTargetService);
-       String jsonString = "{\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\"}";
-       Builder builder = webTarget.request();
-       Response response = builder.post(Entity.json(jsonString));
-       return response.readEntity(String.class);
+        Client client = Client.create();
+        String urlTargetService =  URL_ACCMANAGER+"/"+"getAccountByProperty";
+        WebResource webResource = client.resource(urlTargetService);
+        String params = "{\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\"}";
+        ClientResponse response = webResource.type("application/json").post(ClientResponse.class,params);
+        if(response.getStatus()!=201){
+            throw new RuntimeException("HTTP Error: "+ response.getStatus());
+        }
+        return response.getEntity(String.class);
     }
 
     
