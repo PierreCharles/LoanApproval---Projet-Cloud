@@ -122,10 +122,11 @@ Test this service with curl :
 
 /creditRequestByName :
 
-    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre", "lastName" : "CHARLES", "sold" : 10000" }' https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestByName
+    curl -XPOST -H 'Content-Type:application/json' -d '{"firstName": "Pierre", "lastName" : "CHARLES", "sold" : "10000" }' https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestByName
 
 /creditRequestById :
 
     curl -XPOST -H 'Content-Type:application/json' -d '{"idAccount": "00001", "sold" : "11000"}' https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestById
+
 
 
