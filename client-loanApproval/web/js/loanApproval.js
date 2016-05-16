@@ -42,8 +42,11 @@ function addLoan() {
         data : JSON.stringify(loan),
         contentType: 'application/json',
     }).done(function(data) {
-       // TRAITEMENT SI CEST VALIDE AVEC LES VALEURS RETOURNEES
-       $('.errorLoan').text("La demande de crédit est okay");
+       if(data.response !== "" || data.response !== undefined) {
+            $('.errorLoan').text(data.response);
+        } else {
+            $('.errorLoan').text("La demande de crédit a rencontré un problème");
+        }
     }).fail(function(data) {
         $('.errorLoan').text("Une erreur est survenue lors de la demande de crédit");
     });
