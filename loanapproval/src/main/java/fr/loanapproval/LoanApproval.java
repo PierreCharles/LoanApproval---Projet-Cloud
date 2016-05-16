@@ -156,7 +156,7 @@ public class LoanApproval {
             return "{'error':'" + e.getMessage() + "'}";   
         }
     }
-
+ 
     /**
      * Method for get id of account with a lastName and a firstName from a web service AccManager
      * 
@@ -167,7 +167,9 @@ public class LoanApproval {
     public String getIdFromAccManager(String lastName, String firstName)
     {
         Client client = Client.create();
-        String urlTargetService =  URL_ACCMANAGER+"/"+"getAccountByProperty";
+        String urlTargetService =  URL_ACCMANAGER+"/"+"getAccountByProperty/";
+
+        System.out.println(urlTargetService);
         WebResource webResource = client.resource(urlTargetService);
         String params = "{\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\"}";
         System.out.println(firstName+lastName);
@@ -180,7 +182,7 @@ public class LoanApproval {
         return response.getEntity(String.class);
     }
 
-    
+     
     /**
      * Method handling HTTP GET requests. The returned object will be sent
      * 
