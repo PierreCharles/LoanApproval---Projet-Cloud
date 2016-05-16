@@ -50,7 +50,7 @@ public class CheckAccount {
        		int id = Integer.parseInt(idAccount);
 
 			JSONObject accountJson =  getDataRequestFromService(URL_ACCMANAGER+"/"+id);
-			String output = "{\"response\":\""+json.get("risk")+"\"}";
+			String output = "{\"response\":\""+accountJson.get("risk")+"\"}";
 			
 			return Response.status(200).entity(output).build();
 	    } catch (Exception e) {
@@ -73,9 +73,11 @@ public class CheckAccount {
             if (response.getStatus() != 200) {
                throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
             }
-            
+
+            JSONParser jsonParser = new JSONParser();
+   
             String entity = response.getEntity(String.class);
-            return (JSONObject) parser.parse(entity);
+            return (JSONObject) jsonParser.parse(entity);
     }
 	
     /**
