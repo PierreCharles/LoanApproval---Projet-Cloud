@@ -31,7 +31,7 @@ function addLoan() {
         // Webservice url
         var urlService = "https://intense-everglades-81868.herokuapp.com/loanapproval/creditRequestById";
     }
-    console.log(params,urlService);
+
     $.ajax({
         url : urlService,
         type : 'POST', 
