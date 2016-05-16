@@ -98,7 +98,7 @@ public class AccManager
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("getAccountByProperty/")
-	public Response getAccountWithProperty(String inputJSON)
+	public Response getAccountByProperty(String inputJSON)
 	{
 		try {
 			JSONObject params = new JSONObject(inputJSON);
