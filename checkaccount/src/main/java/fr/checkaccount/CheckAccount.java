@@ -33,7 +33,7 @@ public class CheckAccount {
 	public static final String URL_ACCMANAGER = "https://1-dot-accmanager-1294.appspot.com/rest/bankAccount/getAccount";
 
 	/**
-	 * Methode for check is an account is "low" or "hight" -> Call AccManager service
+	 * Method for check is an account is "low" or "hight" -> Call AccManager service
 	 * 
 	 * @param idAccount
 	 * 

@@ -55,7 +55,7 @@ public class LoanApproval {
 
 
     /**
-     * Methode for check query credit with a firstName a lastName and a sold
+     * Method for check query credit with a firstName a lastName and a sold
      *
      * @param  lastName, firstName and a sold
      * 
@@ -67,12 +67,15 @@ public class LoanApproval {
     @Path("creditRequestByName")
     public Response creditRequestByName(String inputJSON) 
     {
-        try {
+        try 
+        {
             JSONParser jsonParser = new JSONParser();
+
             JSONObject objectPeople = (JSONObject) jsonParser.parse(inputJSON);
-            String idAccount = getIdFromAccManager((String) objectPeople.get("lastName"), (String) objectPeople.get("firstName"));
-            System.out.println(idAccount);
-            return creditrequest(idAccount, (String) objectPeople.get("sold"));
+            String accountEntity = getIdFromAccManager((String) objectPeople.get("lastName"), (String) objectPeople.get("firstName"));
+            JSONObject jsonAccount = (JSONObject) jsonParser.parse(accountEntity);
+            System.out.println(jsonAccount.get("account"));
+            return creditrequest((String) jsonAccount.get("account"), (String) objectPeople.get("sold"));
         } catch (Exception e) {
             String output = "{'error':'" + e.getMessage() + "'}";   
             return Response.status(204).entity(output).header("Access-Control-Allow-Origin", "*").build();
@@ -104,7 +107,7 @@ public class LoanApproval {
     }
 
     /**
-     * Methode for check the query credit
+     * Method for check the query credit
      * 
      * @param id account and sold
      * 
@@ -139,7 +142,7 @@ public class LoanApproval {
 
 
     /**
-     * Methode for get Data from service with an URL
+     * Method for get Data from service with an URL
      * 
      * @param String url
      * 
@@ -155,7 +158,7 @@ public class LoanApproval {
     }
 
     /**
-     * Methode for get id of account with a lastName and a firstName from a web service AccManager
+     * Method for get id of account with a lastName and a firstName from a web service AccManager
      * 
      * @param  lastName and the firstName
      * 
@@ -167,10 +170,13 @@ public class LoanApproval {
         String urlTargetService =  URL_ACCMANAGER+"/"+"getAccountByProperty";
         WebResource webResource = client.resource(urlTargetService);
         String params = "{\"firstName\":\""+firstName+"\",\"lastName\":\""+lastName+"\"}";
+        System.out.println(firstName+lastName);
         ClientResponse response = webResource.type("application/json").post(ClientResponse.class,params);
+        System.out.println(response.getStatus());
         if(response.getStatus()!=200){
             throw new RuntimeException("HTTP Error: "+ response.getStatus());
         }
+        System.out.println(response.getEntity(String.class));
         return response.getEntity(String.class);
     }
 
