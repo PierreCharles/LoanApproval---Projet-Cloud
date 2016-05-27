@@ -18,7 +18,7 @@ Go into client-loanApproval directory:
 
     cd client-loanApproval/
 
-Install all dependencies:
+Install all dependencies php:
 
     composer install
 
